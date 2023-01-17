@@ -7,5 +7,5 @@ This repository synchronizes dotfiles across machines.
 To run the script, execute the following command:
 
 ```shell
-python3 util.py
+python3.10 util.py
 ```
