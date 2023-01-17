@@ -58,7 +58,6 @@
         "--profile",
         "black"
     ],
-    "isort.path": "isort",
     "python.analysis.autoImportCompletions": true,
     "python.analysis.autoSearchPaths": true,
     "python.analysis.diagnosticMode": "workspace",
