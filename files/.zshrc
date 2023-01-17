@@ -73,6 +73,9 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
+	npm
+	virtualenvwrapper
+	vscode
 	zsh-autosuggestions
 )
 
