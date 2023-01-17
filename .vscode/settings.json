@@ -1,0 +1,77 @@
+{
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true,
+    "eslint.enable": true,
+    "eslint.options": {
+        "extensions": [
+            ".js",
+            ".jsx",
+            ".html",
+            ".ts",
+            ".tsx",
+            ".vue"
+        ]
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+        "vue"
+    ],
+    "files.eol": "\n",
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "python.defaultInterpreterPath": "~/.venvs/dotfiles/bin/python",
+    "python.formatting.blackPath": "black",
+    "python.formatting.provider": "none",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.testing.pytestArgs": [],
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "search.exclude": {
+        ".angular/**": true,
+        ".git/**": true,
+        "coverage/**": true,
+        "dist/**": true,
+        "junit/**": true,
+        "node_modules/**": true
+    }
+}

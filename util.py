@@ -23,13 +23,11 @@ FILES = [
     f"{HOME}/.zshrc",
 ]
 
-DESTINATION = Path("./").resolve()
+DESTINATION = Path("./files").resolve()
 print(f"Destination: {DESTINATION}")
 
 
-def copy_specific_files_to_specific_folder(
-    folder: Union[str, Path], files: list[str], log: bool = False
-):
+def copy_dot_files(folder: Union[str, Path], files: list[str], log: bool = False):
     if log:
         print(f"Copying files to folder: {folder}")
 
@@ -50,5 +48,4 @@ def copy_specific_files_to_specific_folder(
                 shutil.copy(Path(file).resolve(), file_destination)
 
 
-# copy_folders_to_destination(DIRECTORIES, LOG)
-copy_specific_files_to_specific_folder(DESTINATION, FILES, LOG)
+copy_dot_files(DESTINATION, FILES, LOG)
