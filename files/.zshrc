@@ -26,7 +26,7 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode auto # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -175,6 +175,12 @@ if [ $LOG = 1 ]; then
 fi
 export SALESSYNC_HOME="$PROJECT_HOME/salessync"
 alias salessync='cd $SALESSYNC_HOME'
+
+# Mac
+if [ "$machine" = "Mac" ]; then
+	defaults write .GlobalPreferences com.apple.mouse.scaling -1
+	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+fi
 
 # NVM Setup
 export NVM_DIR="$HOME/.nvm"
