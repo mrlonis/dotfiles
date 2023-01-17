@@ -112,6 +112,13 @@ LOG=1
 
 # zsh settings
 export HISTFILE="$HOME/.zsh_history"
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+setopt INC_APPEND_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+setopt EXTENDED_HISTORY
+setopt HIST_FIND_NO_DUPS # Doesn't show duplicate commands using the UP and DOWN arrow keys
+# setopt HIST_IGNORE_ALL_DUPS # Doesn't write duplicate commands to history
 
 # Determine OS
 unameOut="$(uname -s)"
