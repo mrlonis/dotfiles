@@ -107,18 +107,21 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Control Logging
-log=0
+LOG=1
+
+# zsh settings
+export HISTFILE="$HOME/.zsh_history"
 
 # Determine OS
 unameOut="$(uname -s)"
 case "${unameOut}" in
-Linux*) machine=Linux ;;
-Darwin*) machine=Mac ;;
-CYGWIN*) machine=Cygwin ;;
-MINGW*) machine=MinGw ;;
+Linux*) machine="Linux" ;;
+Darwin*) machine="Mac" ;;
+CYGWIN*) machine="Cygwin" ;;
+MINGW*) machine="MinGw" ;;
 *) machine="UNKNOWN:${unameOut}" ;;
 esac
-if [ $log == 1 ]; then
+if [ $LOG == 1 ]; then
 	echo "Machine: ${machine}"
 fi
 
@@ -128,53 +131,53 @@ fi
 # HOMEBREW_CELLAR=/home/linuxbrew/.linuxbrew/Cellar
 # HOMEBREW_REPOSITORY=/home/linuxbrew/.linuxbrew/Homebrew
 if [ $machine == "Linux"]; then
-	PYTHON37=/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7
-	PYTHON38=/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8
-	PYTHON39=/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9
-	PYTHON310=/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.9/bin/python3.10
+	PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
+	PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
+	PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
+	PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.9/bin/python3.10"
 elif [ $machine == "Mac"]; then
-	PYTHON37=/usr/local/Cellar/python@3.7/3.7.16/bin/python3.7
-	PYTHON38=/usr/local/Cellar/python@3.8/3.8.16/bin/python3.8
-	PYTHON39=/usr/local/Cellar/python@3.9/3.9.16/bin/python3.9
-	PYTHON310=/usr/local/Cellar/python@3.10/3.10.9/bin/python3.10
+	PYTHON37="/usr/local/Cellar/python@3.7/3.7.16/bin/python3.7"
+	PYTHON38="/usr/local/Cellar/python@3.8/3.8.16/bin/python3.8"
+	PYTHON39="/usr/local/Cellar/python@3.9/3.9.16/bin/python3.9"
+	PYTHON310="/usr/local/Cellar/python@3.10/3.10.9/bin/python3.10"
 else
 	echo "Unknown machine type. Cannot determine python paths"
 fi
 
 # utility-repo-scripts env variables
 # export PYTHON=$PYTHON37 # Used to override Python version for virtual environments
-export VENV_FOLDER_NAME=.venvs
-
-# aliases
-if [ $log == 1 ]; then
-	echo "Creating alias laws"
-fi
-alias laws='aws --endpoint-url=http://localhost:4566'
-
-if [ $log == 1 ]; then
-	echo "Creating alias mrlonis"
-fi
-export MRLONIS_HOME="$HOME/Documents/GitHub/mrlonis"
-alias mrlonis="cd $MRLONIS_HOME"
-
-if [ $log == 1 ]; then
-	echo "Creating alias salessync"
-fi
-export SALESSYNC_HOME="$HOME/Documents/GitHub/salessync"
-alias salessync="cd $SALESSYNC_HOME"
+export VENV_FOLDER_NAME=".venvs"
 
 # virtualenvwrapper Setup
-export VIRTUALENVWRAPPER_PYTHON=$PYTHON310
-export WORKON_HOME=$HOME/$VENV_FOLDER_NAME
-export PROJECT_HOME=$HOME/Documents/GitHub
+export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
+export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
+export PROJECT_HOME="$HOME/Documents/GitHub"
 
-if [ $machine == "Mac"]; then
+if [ "$machine" == "Mac"]; then
 	source /usr/local/bin/virtualenvwrapper.sh
-elif [ $machine == "Linux"]; then
+elif [ "$machine" == "Linux"]; then
 	source /home/linuxbrew/.linuxbrew/bin/virtualenvwrapper.sh
 else
 	echo "Unknown machine type. Cannot determine virtualenvwrapper.sh location"
 fi
+
+# aliases
+if [ $LOG == 1 ]; then
+	echo "Creating alias laws"
+fi
+alias laws='aws --endpoint-url=http://localhost:4566'
+
+if [ $LOG == 1 ]; then
+	echo "Creating alias mrlonis"
+fi
+export MRLONIS_HOME="$PROJECT_HOME/mrlonis"
+alias mrlonis="cd $MRLONIS_HOME"
+
+if [ $LOG == 1 ]; then
+	echo "Creating alias salessync"
+fi
+export SALESSYNC_HOME="$PROJECT_HOME/salessync"
+alias salessync="cd $SALESSYNC_HOME"
 
 # NVM Setup
 export NVM_DIR="$HOME/.nvm"
