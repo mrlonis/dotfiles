@@ -196,6 +196,10 @@ if [ "$machine" = "Mac" ]; then
 	defaults write com.apple.Finder AppleShowAllFiles true
 fi
 
+# aws
+export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
+export AWS_SECRET_ACCESS_KEY=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
+
 # NVM Setup
 if [ "$machine" = "Linux" ]; then
 	export NVM_DIR="$HOME/.nvm"
