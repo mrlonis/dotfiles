@@ -155,6 +155,7 @@ fi
 
 # utility-repo-scripts env variables
 # export PYTHON=$PYTHON37 # Used to override Python version for virtual environments
+unset PYTHON
 export VENV_FOLDER_NAME=".venvs"
 
 # virtualenvwrapper Setup
