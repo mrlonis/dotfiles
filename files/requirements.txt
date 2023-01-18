@@ -4,6 +4,8 @@
 #
 #    pip-compile --resolver=backtracking
 #
+--trusted-host pypi.org
+
 build==0.10.0
     # via pip-tools
 click==8.1.3

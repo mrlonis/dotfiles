@@ -1,2 +1,3 @@
+--trusted-host pypi.org
 pip-tools
 virtualenvwrapper
