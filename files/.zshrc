@@ -73,9 +73,8 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
-	npm
+	nvm
 	virtualenvwrapper
-	vscode
 	zsh-autosuggestions
 )
 
@@ -138,6 +137,8 @@ fi
 # HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 # HOMEBREW_CELLAR=/home/linuxbrew/.linuxbrew/Cellar
 # HOMEBREW_REPOSITORY=/home/linuxbrew/.linuxbrew/Homebrew
+#
+# Only HOMEBREW_PREFIX seems to exist on Mac
 if [ "$machine" = "Linux" ]; then
 	PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
 	PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
@@ -159,6 +160,7 @@ export VENV_FOLDER_NAME=".venvs"
 # virtualenvwrapper Setup
 export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
 export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
+export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
 export PROJECT_HOME="$HOME/Documents/GitHub"
 if [ "$machine" = "Mac" ]; then
 	source /usr/local/bin/virtualenvwrapper.sh
@@ -190,9 +192,15 @@ alias salessync='cd $SALESSYNC_HOME'
 if [ "$machine" = "Mac" ]; then
 	defaults write .GlobalPreferences com.apple.mouse.scaling -1
 	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+	defaults write com.apple.Finder AppleShowAllFiles true
 fi
 
 # NVM Setup
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+if [ "$machine" = "Linux" ]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+elif [ "$machine" = "Mac" ]; then
+	export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
