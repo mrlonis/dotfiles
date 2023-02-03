@@ -4,3 +4,6 @@ pip-tools
 pre-commit
 pylint
 pylint-junit
+pytest
+pytest-cov
+pytest-xdist[psutil]
