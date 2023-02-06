@@ -1,0 +1,12 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Matthew Lonis
+	email = mattlonis@gmail.com
+[pull]
+	rebase = true
+[credential]
+	helper = store
