@@ -50,6 +50,7 @@
   },
   "black-formatter.args": ["--line-length", "110"],
   "black-formatter.importStrategy": "fromEnvironment",
+  "black-formatter.showNotifications": "onError",
   "cSpell.userWords": [
     "autouse",
     "boto",
@@ -75,7 +76,20 @@
   "eslint.debug": true,
   "eslint.format.enable": true,
   "eslint.onIgnoredFiles": "warn",
+  "eslint.options": {
+    "cache": true,
+    "extensions": [".js", ".jsx", ".ts", ".tsx", ".html"],
+    "fix": true
+  },
   "eslint.useESLintClass": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "json"
+  ],
   "explorer.confirmDelete": true,
   "explorer.confirmDragAndDrop": true,
   "extensions.supportVirtualWorkspaces": {
@@ -93,8 +107,9 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "git.autofetch": true,
-  "git.confirmSync": false,
+  "git.autofetch": "all",
+  "git.autorefresh": true,
+  "git.confirmSync": true,
   "git.enableSmartCommit": true,
   "github.copilot.enable": {
     "*": true,
@@ -105,14 +120,18 @@
   "githubPullRequests.createOnPublishBranch": "never",
   "isort.args": ["--profile", "black"],
   "isort.importStrategy": "fromEnvironment",
+  "isort.showNotifications": "onError",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
   },
   "pylint.importStrategy": "fromEnvironment",
+  "pylint.showNotifications": "onError",
   "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoImportUserSymbols": true,
   "python.analysis.autoSearchPaths": true,
+  "python.analysis.completeFunctionParens": true,
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.importFormat": "absolute",
   "python.analysis.indexing": true,
@@ -163,7 +182,6 @@
   "python.analysis.typeCheckingMode": "basic",
   "python.analysis.useLibraryCodeForTypes": true,
   "python.formatting.provider": "none",
-  "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.testing.pytestArgs": [],
   "python.testing.pytestEnabled": true,
@@ -176,12 +194,18 @@
     "**/node_modules/**": true
   },
   "security.workspace.trust.untrustedFiles": "open",
+  "settingsSync.ignoredSettings": [
+    "-black-formatter.showNotifications",
+    "-isort.showNotifications",
+    "-pylint.showNotifications"
+  ],
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.scrollback": 100000,
   "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
   "typescript.inlayHints.variableTypes.suppressWhenTypeMatchesName": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vscode-edge-devtools.webhint": false,
+  "vsintellicode.features.python.deepLearning": "enabled",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "workbench.colorTheme": "Default Dark+",
   "workbench.editor.untitled.hint": "hidden",
