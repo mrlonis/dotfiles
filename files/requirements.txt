@@ -18,9 +18,9 @@ packaging==23.0
     # via build
 pbr==5.11.1
     # via stevedore
-pip-tools==6.12.1
+pip-tools==6.12.2
     # via -r requirements.in
-platformdirs==2.6.2
+platformdirs==3.0.0
     # via virtualenv
 pyproject-hooks==1.0.0
     # via build
@@ -30,7 +30,7 @@ tomli==2.0.1
     # via
     #   build
     #   pyproject-hooks
-virtualenv==20.17.1
+virtualenv==20.19.0
     # via virtualenvwrapper
 virtualenv-clone==0.5.7
     # via virtualenvwrapper

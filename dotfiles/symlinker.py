@@ -2,6 +2,13 @@ import os
 from pathlib import Path
 from typing import Union
 
+from pydantic import BaseModel
+
+
+class SymlinkerInput(BaseModel):
+    destination_folder: str
+    filename: str
+
 
 def create_symlinks(destination_folder: Union[str, Path], filenames: list[str], log: bool = False, test: bool = False):
     # pylint: disable=too-many-branches
