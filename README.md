@@ -29,3 +29,9 @@ To run the linter, execute the following command:
 ```shell
 pylint dotfiles tests
 ```
+
+## Printing Links in Terminal
+
+```shell
+ls -lhaF | grep ^l
+```
