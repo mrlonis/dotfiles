@@ -4,18 +4,14 @@ This repository synchronizes dotfiles across machines.
 
 ## Setup
 
-To setup the repository, execute the following commands:
-
-```shell
-./setup
-```
+To setup the repository, run `./setup` and activate the virtual environment the script tells you to.
 
 ## Running
 
-To run the script, execute the following command:
+To run the dotfiles synchronizer, execute the following command in the virtual environment:
 
 ```shell
-python3.10 util.py
+python util.py
 ```
 
 ## Testing

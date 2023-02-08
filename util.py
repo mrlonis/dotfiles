@@ -1,4 +1,4 @@
-# To Run - python3 util.py
+# To Run - python util.py
 import os
 from pathlib import Path
 
