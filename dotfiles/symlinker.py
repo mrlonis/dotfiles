@@ -45,7 +45,8 @@ def create_symlinks(
             if log:
                 print(f"Creating symlink for {src_file_path} to {destination_file_path}")
             if not test:
-                os.symlink(src_file_path, destination_file_path)
+                target_is_directory = os.path.isdir(src_file_path)
+                os.symlink(src_file_path, destination_file_path, target_is_directory=target_is_directory)
                 if log:
                     print(f"Created symlink for {src_file_path} to {destination_file_path}")
             else:
