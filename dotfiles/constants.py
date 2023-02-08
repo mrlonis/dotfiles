@@ -15,6 +15,7 @@ FILENAMES = [
     ".pypirc",
     ".zshrc",
     "git_pull_all.sh",
+    ".aws",
 ]
 
 
