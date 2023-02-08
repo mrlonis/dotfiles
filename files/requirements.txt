@@ -6,30 +6,71 @@
 #
 --trusted-host pypi.org
 
+astroid==2.14.1
+    # via pylint
+black==23.1.0
+    # via -r requirements.in
 build==0.10.0
     # via pip-tools
 click==8.1.3
-    # via pip-tools
+    # via
+    #   black
+    #   pip-tools
+dill==0.3.6
+    # via pylint
 distlib==0.3.6
     # via virtualenv
 filelock==3.9.0
     # via virtualenv
+isort==5.12.0
+    # via
+    #   -r requirements.in
+    #   pylint
+junit-xml-2==1.9
+    # via pylint-junit
+lazy-object-proxy==1.9.0
+    # via astroid
+mccabe==0.7.0
+    # via pylint
+mypy-extensions==1.0.0
+    # via black
 packaging==23.0
-    # via build
+    # via
+    #   black
+    #   build
+pathspec==0.11.0
+    # via black
 pbr==5.11.1
     # via stevedore
 pip-tools==6.12.2
     # via -r requirements.in
 platformdirs==3.0.0
-    # via virtualenv
+    # via
+    #   black
+    #   pylint
+    #   virtualenv
+pylint==2.16.1
+    # via
+    #   -r requirements.in
+    #   pylint-junit
+pylint-junit==0.3.2
+    # via -r requirements.in
 pyproject-hooks==1.0.0
     # via build
+six==1.16.0
+    # via junit-xml-2
 stevedore==4.1.1
     # via virtualenvwrapper
 tomli==2.0.1
     # via
+    #   black
     #   build
+    #   pylint
     #   pyproject-hooks
+tomlkit==0.11.6
+    # via pylint
+typing-extensions==4.4.0
+    # via astroid
 virtualenv==20.19.0
     # via virtualenvwrapper
 virtualenv-clone==0.5.7
@@ -38,6 +79,8 @@ virtualenvwrapper==4.8.4
     # via -r requirements.in
 wheel==0.38.4
     # via pip-tools
+wrapt==1.14.1
+    # via astroid
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip

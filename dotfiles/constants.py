@@ -14,6 +14,7 @@ FILENAMES = [
     ".profile",
     ".pypirc",
     ".zshrc",
+    "git_pull_all.sh",
 ]
 
 

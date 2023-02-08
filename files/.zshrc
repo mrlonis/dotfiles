@@ -143,12 +143,12 @@ if [ "$machine" = "Linux" ]; then
 	PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
 	PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
 	PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
-	PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.9/bin/python3.10"
+	PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.10/bin/python3.10"
 elif [ "$machine" = "Mac" ]; then
 	PYTHON37="/usr/local/Cellar/python@3.7/3.7.16/bin/python3.7"
 	PYTHON38="/usr/local/Cellar/python@3.8/3.8.16/bin/python3.8"
 	PYTHON39="/usr/local/Cellar/python@3.9/3.9.16/bin/python3.9"
-	PYTHON310="/usr/local/Cellar/python@3.10/3.10.9/bin/python3.10"
+	PYTHON310="/usr/local/Cellar/python@3.10/3.10.10/bin/python3.10"
 else
 	echo "Unknown machine type. Cannot determine python paths"
 fi
