@@ -36,6 +36,14 @@ def get_file_inputs(file_mode: FileMode):
                 else:
                     raise ValueError(f"Invalid file_mode: {file_mode}")
 
-        file_inputs.append(file_input)
+        if filename == ".aws":
+            if sys.platform.startswith("linux"):
+                if file_mode == FileMode.SYMLINK:
+                    # We don't want to symlink the .aws folder on WSL since it is managed
+                    # by the Windows Docker Desktop as a symlink to the Windows .aws folder.
+                    file_input = None
+
+        if file_input:
+            file_inputs.append(file_input)
 
     return file_inputs
