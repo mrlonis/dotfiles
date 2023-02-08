@@ -5,7 +5,7 @@ pip-tools
 pre-commit
 pylint
 pylint-junit
-pydantic
+pydantic[dotenv]
 pytest
 pytest-cov
 pytest-xdist[psutil]

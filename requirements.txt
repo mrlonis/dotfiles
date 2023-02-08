@@ -70,7 +70,7 @@ pre-commit==3.0.4
     # via -r requirements.in
 psutil==5.9.4
     # via pytest-xdist
-pydantic==1.10.4
+pydantic[dotenv]==1.10.4
     # via -r requirements.in
 pylint==2.16.1
     # via
@@ -89,6 +89,8 @@ pytest-cov==4.0.0
     # via -r requirements.in
 pytest-xdist[psutil]==3.2.0
     # via -r requirements.in
+python-dotenv==0.21.1
+    # via pydantic
 pyyaml==6.0
     # via pre-commit
 six==1.16.0
