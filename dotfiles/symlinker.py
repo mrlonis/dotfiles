@@ -2,15 +2,15 @@ import os
 from pathlib import Path
 from typing import Union
 
-from pydantic import BaseModel
+from dotfiles.models import FileInput
 
 
-class SymlinkerInput(BaseModel):
-    destination_folder: str
-    filename: str
-
-
-def create_symlinks(destination_folder: Union[str, Path], filenames: list[str], log: bool = False, test: bool = False):
+def create_symlinks(
+    destination_folder: Union[str, Path],
+    filenames: list[FileInput],
+    log: bool = False,
+    test: bool = False,
+):
     # pylint: disable=too-many-branches
     if log:
         print(f"Creating symlinks in folder: {destination_folder}")
@@ -19,11 +19,16 @@ def create_symlinks(destination_folder: Union[str, Path], filenames: list[str], 
         if log:
             print("")
             print(f"Processing File: {file}")
-        src_file_path = Path(os.path.join(Path("./files").resolve(), os.path.basename(file))).resolve()
+        src_file_path = Path(os.path.join(Path("./files").resolve(), os.path.basename(file.filename))).resolve()
 
         # Check if file exists in ./files
         if os.path.exists(src_file_path):
-            destination_file_path = Path(os.path.join(destination_folder, os.path.basename(file))).absolute()
+            destination_file_path = Path(
+                os.path.join(
+                    destination_folder,
+                    os.path.basename(file.destination_filename if file.destination_filename else file.filename),
+                )
+            ).absolute()
 
             # Check if file exists in folder directory
             if os.path.exists(destination_file_path) or os.path.islink(destination_file_path):

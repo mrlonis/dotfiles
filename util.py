@@ -2,8 +2,9 @@
 import os
 from pathlib import Path
 
-from dotfiles.constants import FILENAMES
+from dotfiles.constants import get_file_inputs
 from dotfiles.copier import copy_dot_files
+from dotfiles.models import FileMode
 from dotfiles.symlinker import create_symlinks
 
 LOG = True
@@ -15,7 +16,13 @@ assert HOME is not None
 DESTINATION = Path("./files").resolve()
 print(f"Destination: {DESTINATION}")
 
-copy_dot_files(source_folder=HOME, destination_folder=DESTINATION, filenames=FILENAMES, overwrite=OVERWRITE, log=LOG)
+copy_dot_files(
+    source_folder=HOME,
+    destination_folder=DESTINATION,
+    filenames=get_file_inputs(file_mode=FileMode.COPY),
+    overwrite=OVERWRITE,
+    log=LOG,
+)
 print("----------------------------------")
 print("")
-create_symlinks(destination_folder=HOME, filenames=FILENAMES, log=LOG)
+create_symlinks(destination_folder=HOME, filenames=get_file_inputs(file_mode=FileMode.SYMLINK), log=LOG)

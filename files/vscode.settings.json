@@ -49,18 +49,20 @@
     "regionAddAutomatically": true
   },
   "black-formatter.args": ["--line-length", "110"],
-  "black-formatter.importStrategy": "fromEnvironment",
-  "black-formatter.showNotifications": "onError",
+  "black-formatter.importStrategy": "useBundled",
   "cSpell.userWords": [
     "autouse",
     "boto",
     "botocore",
+    "dotfiles",
     "httpx",
     "moto",
     "pydantic",
     "Pylint",
     "pytest",
-    "setenv"
+    "pytestmark",
+    "setenv",
+    "Symlinker"
   ],
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.acceptSuggestionOnEnter": "on",
@@ -90,7 +92,7 @@
     "html",
     "json"
   ],
-  "explorer.confirmDelete": true,
+  "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": true,
   "extensions.supportVirtualWorkspaces": {
     "pub.name": false
@@ -109,7 +111,7 @@
   "files.trimTrailingWhitespace": true,
   "git.autofetch": "all",
   "git.autorefresh": true,
-  "git.confirmSync": true,
+  "git.confirmSync": false,
   "git.enableSmartCommit": true,
   "github.copilot.enable": {
     "*": true,
@@ -118,16 +120,15 @@
     "yaml": true
   },
   "githubPullRequests.createOnPublishBranch": "never",
+  "githubPullRequests.pullBranch": "never",
   "isort.args": ["--profile", "black"],
-  "isort.importStrategy": "fromEnvironment",
-  "isort.showNotifications": "onError",
+  "isort.importStrategy": "useBundled",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
   },
   "pylint.importStrategy": "fromEnvironment",
-  "pylint.showNotifications": "onError",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.autoImportUserSymbols": true,
   "python.analysis.autoSearchPaths": true,

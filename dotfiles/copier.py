@@ -2,11 +2,13 @@ import os
 import shutil
 from pathlib import Path
 
+from dotfiles.models import FileInput
+
 
 def copy_dot_files(
     source_folder: str | Path,
     destination_folder: str | Path,
-    filenames: list[str],
+    filenames: list[FileInput],
     overwrite: bool = False,
     log: bool = False,
     test: bool = False,
@@ -32,7 +34,7 @@ def copy_dot_files(
 def _copy_dot_file(
     source_folder: str | Path,
     destination_folder: str | Path,
-    file: str,
+    file: FileInput,
     overwrite: bool = False,
     log: bool = False,
     test: bool = False,
@@ -41,12 +43,17 @@ def _copy_dot_file(
     if log:
         print("")
         print(f"Processing File: {file}")
-    source_file_path = Path(os.path.join(source_folder, os.path.basename(file))).absolute()
+    source_file_path = Path(os.path.join(source_folder, os.path.basename(file.filename))).absolute()
 
     exists = os.path.exists(source_file_path)
     is_symlink = os.path.islink(source_file_path)
     if exists and not is_symlink:
-        destination_file_path = Path(os.path.join(destination_folder, os.path.basename(file))).resolve()
+        destination_file_path = Path(
+            os.path.join(
+                destination_folder,
+                os.path.basename(file.destination_filename if file.destination_filename else file.filename),
+            )
+        ).resolve()
 
         if os.path.exists(destination_file_path):
             if overwrite:

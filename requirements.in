@@ -1,5 +1,6 @@
 black
 isort
+greenlet
 pip-tools
 pre-commit
 pylint

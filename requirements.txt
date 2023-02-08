@@ -30,6 +30,8 @@ execnet==1.9.0
     # via pytest-xdist
 filelock==3.9.0
     # via virtualenv
+greenlet==2.0.2
+    # via -r requirements.in
 identify==2.5.17
     # via pre-commit
 iniconfig==2.0.0
