@@ -1,0 +1,7 @@
+-r requirements.in
+-c requirements.txt
+pylint
+pylint-junit
+pytest
+pytest-cov
+pytest-xdist[psutil]
