@@ -1,0 +1,7 @@
+-r requirements-test.in
+-c requirements.txt
+-c requirements-test.txt
+black
+isort
+pip-tools
+pre-commit
