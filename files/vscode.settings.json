@@ -25,7 +25,8 @@
       "source.organizeImports": true
     },
     "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
   },
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -56,12 +57,15 @@
     "botocore",
     "dotfiles",
     "httpx",
+    "markdownlint",
     "moto",
     "pydantic",
     "Pylint",
     "pytest",
     "pytestmark",
     "setenv",
+    "shellcheck",
+    "shfmt",
     "Symlinker"
   ],
   "diffEditor.ignoreTrimWhitespace": false,
@@ -80,7 +84,7 @@
   "eslint.onIgnoredFiles": "warn",
   "eslint.options": {
     "cache": true,
-    "extensions": [".js", ".jsx", ".ts", ".tsx", ".html"],
+    "extensions": [".js", ".jsx", ".ts", ".tsx", ".html", ".vue"],
     "fix": true
   },
   "eslint.useESLintClass": true,
@@ -90,10 +94,10 @@
     "typescript",
     "typescriptreact",
     "html",
-    "json"
+    "vue"
   ],
   "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": true,
+  "explorer.confirmDragAndDrop": false,
   "extensions.supportVirtualWorkspaces": {
     "pub.name": false
   },
@@ -132,7 +136,7 @@
   "python.analysis.autoImportCompletions": true,
   "python.analysis.autoImportUserSymbols": true,
   "python.analysis.autoSearchPaths": true,
-  "python.analysis.completeFunctionParens": true,
+  "python.analysis.completeFunctionParens": false,
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.importFormat": "absolute",
   "python.analysis.indexing": true,
