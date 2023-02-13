@@ -36,9 +36,41 @@ pylint dotfiles tests
 ls -lhaF | grep ^l
 ```
 
-## Markdownlint
+## Brew Packages
 
-### Ruby Setup
+### shfmt
+
+To format shell files, install `shfmt` with brew:
+
+```shell
+brew install shfmt
+```
+
+and then run the following command to format all shell files in the repo:
+
+```shell
+shfmt -l -w setup_python_app.sh
+```
+
+### shellcheck
+
+To lint shell files, install `shellcheck` with brew:
+
+```shell
+brew install shellcheck
+```
+
+and then run the following command to lint a shell file changing out the file name/path as needed:
+
+```shell
+shellcheck setup_python_app.sh
+```
+
+#### shellcheck VS Code Extension
+
+To get integrated shellcheck linting in VS Code, install the [shellcheck extension](https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck)
+
+### Ruby
 
 ```shell
 brew install rbenv ruby-build
@@ -48,5 +80,11 @@ rbenv install 3.2.1
 rbenv global 3.2.1
 rbenv rehash
 gem update --system
+gem install mdl
+```
+
+#### Markdownlint
+
+```shell
 gem install mdl
 ```
