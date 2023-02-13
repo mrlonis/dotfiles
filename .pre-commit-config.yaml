@@ -19,3 +19,11 @@ repos:
         types: [python]
         exclude: ^alembic/
         args: [pylint, -v, --rcfile=.pylintrc]
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 3.0.0
+    hooks:
+      - id: git-check # Configure in .gitattributes
+      - id: git-dirty # Configure in .gitignore
+      - id: markdownlint # Configure in .mdlrc
+      - id: shellcheck
+      - id: shfmt

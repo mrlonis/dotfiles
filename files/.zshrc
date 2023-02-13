@@ -1,3 +1,4 @@
+# shellcheck disable=SC2034,SC2155,SC2148
 # Format this file by running: shfmt -l -w -p .zshrc
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -78,7 +79,7 @@ plugins=(
 	zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -199,6 +200,10 @@ fi
 # aws
 export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
 export AWS_SECRET_ACCESS_KEY=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
+
+# rbenv setup
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
 
 # NVM Setup
 if [ "$machine" = "Linux" ]; then

@@ -1,5 +1,5 @@
--r requirements.in
 -c requirements.txt
+greenlet # Needed for coverage analysis
 pylint
 pylint-junit
 pytest
