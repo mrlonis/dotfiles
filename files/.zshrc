@@ -129,6 +129,7 @@ CYGWIN*) machine=Cygwin ;;
 MINGW*) machine=MinGw ;;
 *) machine="UNKNOWN:${unameOut}" ;;
 esac
+
 if [ "$LOG" = 1 ]; then
 	echo "Machine: ${machine}"
 fi
@@ -201,7 +202,10 @@ fi
 export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
 export AWS_SECRET_ACCESS_KEY=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
 
-# rbenv setup
+# Ruby Setup
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+## rbenv setup
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 
