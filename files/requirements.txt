@@ -6,7 +6,7 @@
 #
 --trusted-host pypi.org
 
-astroid==2.14.1
+astroid==2.14.2
     # via pylint
 black==23.1.0
     # via -r requirements.in
@@ -49,7 +49,7 @@ platformdirs==3.0.0
     #   black
     #   pylint
     #   virtualenv
-pylint==2.16.1
+pylint==2.16.2
     # via
     #   -r requirements.in
     #   pylint-junit
@@ -59,7 +59,7 @@ pyproject-hooks==1.0.0
     # via build
 six==1.16.0
     # via junit-xml-2
-stevedore==4.1.1
+stevedore==5.0.0
     # via virtualenvwrapper
 tomli==2.0.1
     # via
