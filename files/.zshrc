@@ -1,3 +1,4 @@
+# shellcheck disable=SC2034,SC2155,SC2148
 # Format this file by running: shfmt -l -w -p .zshrc
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -42,7 +43,7 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -78,7 +79,7 @@ plugins=(
 	zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -128,6 +129,7 @@ CYGWIN*) machine=Cygwin ;;
 MINGW*) machine=MinGw ;;
 *) machine="UNKNOWN:${unameOut}" ;;
 esac
+
 if [ "$LOG" = 1 ]; then
 	echo "Machine: ${machine}"
 fi
@@ -199,6 +201,13 @@ fi
 # aws
 export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
 export AWS_SECRET_ACCESS_KEY=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
+
+# Ruby Setup
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+## rbenv setup
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
 
 # NVM Setup
 if [ "$machine" = "Linux" ]; then
