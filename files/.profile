@@ -1,3 +1,4 @@
+# shellcheck disable=SC2034,SC2148,SC2155
 # Format this file by running: shfmt -l -w -p .profile
 
 # Determine OS

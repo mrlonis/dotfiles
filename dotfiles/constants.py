@@ -16,6 +16,7 @@ FILENAMES = [
     ".zshrc",
     "git_pull_all.sh",
     ".aws",
+    ".mrlonis_after_setup.sh",
 ]
 
 
