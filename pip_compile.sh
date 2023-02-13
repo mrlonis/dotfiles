@@ -1,4 +1,4 @@
 #!/bin/bash
-pip-compile -U requirements.in
-pip-compile -U requirements-test.in
-pip-compile -U requirements-dev.in
+pip-compile -U --resolver=backtracking --strip-extras requirements.in
+pip-compile -U --resolver=backtracking --strip-extras requirements-test.in
+pip-compile -U --resolver=backtracking requirements-dev.in
