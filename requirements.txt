@@ -4,9 +4,9 @@
 #
 #    pip-compile --resolver=backtracking --strip-extras requirements.in
 #
-pydantic==1.10.4
+pydantic==1.10.5
     # via -r requirements.in
 python-dotenv==0.21.1
     # via pydantic
-typing-extensions==4.4.0
+typing-extensions==4.5.0
     # via pydantic
