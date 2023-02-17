@@ -212,7 +212,7 @@ eval "$(rbenv init - zsh)"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
 # Poetry Setup
-if [ "$machine" = "Linux" ]; then
+if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
 	export PATH="$HOME/.local/bin:$PATH"
 fi
 
