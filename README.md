@@ -73,6 +73,8 @@ To get integrated shellcheck linting in VS Code, install the [shellcheck extensi
 ### Ruby
 
 ```shell
+brew install openssl@3 readline libyaml gmp
+brew install rust
 brew install rbenv ruby-build
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zprofile
 echo 'eval "$(rbenv init -)"' >> ~/.zprofile

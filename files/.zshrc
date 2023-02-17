@@ -208,6 +208,7 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 ## rbenv setup
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
 # NVM Setup
 if [ "$machine" = "Linux" ]; then
