@@ -73,6 +73,7 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+	poetry
 	git
 	nvm
 	virtualenvwrapper
@@ -209,6 +210,11 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+
+# Poetry Setup
+if [ "$machine" = "Linux" ]; then
+	export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # NVM Setup
 if [ "$machine" = "Linux" ]; then

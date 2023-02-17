@@ -4,4 +4,3 @@ isort
 pip-tools
 pylint
 pylint-junit
-virtualenvwrapper
