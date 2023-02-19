@@ -4,7 +4,7 @@ rebuild_venv=$1
 rebuild_venv="${rebuild_venv:-0}"
 source utility-repo-scripts/setup_python_app.sh \
 	--debug=1 \
-	--setup_version=2 \
+	--setup_version=3 \
 	--rebuild_venv="$rebuild_venv" \
 	--is_package=0 \
 	--include_jumanji_house=1 \
