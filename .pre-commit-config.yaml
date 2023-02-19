@@ -5,17 +5,24 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/psf/black
-    rev: 23.1.0
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 3.0.0
     hooks:
-      - id: black
-        args: [--line-length=125]
+      - id: git-check # Configure in .gitattributes
+      - id: git-dirty # Configure in .gitignore
+      - id: markdownlint # Configure in .mdlrc
+      - id: shellcheck
+      - id: shfmt
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
       - id: isort
         name: isort (python)
-        args: [--profile=black, --line-length=125]
+        args: [--settings-file=pyproject.toml]
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black # Configure in pyproject.toml
   - repo: local
     hooks:
       - id: pylint
@@ -25,11 +32,3 @@ repos:
         types: [python]
         exclude: ^alembic/
         args: [pylint, -v, --rcfile=.pylintrc]
-  - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 3.0.0
-    hooks:
-      - id: git-check # Configure in .gitattributes
-      - id: git-dirty # Configure in .gitignore
-      - id: markdownlint # Configure in .mdlrc
-      - id: shellcheck
-      - id: shfmt
