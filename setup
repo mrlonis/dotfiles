@@ -12,5 +12,4 @@ source utility-repo-scripts/setup_python_app.sh \
 	--python_formatter=black \
 	--python_linter=pylint \
 	--python_testing_framework=pytest \
-	--no_jq=0 \
-	--line_length=125
+	--no_jq=0
