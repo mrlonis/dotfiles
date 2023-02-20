@@ -1,35 +1,13 @@
+[build-system]
+requires = [ "poetry-core",]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "dotfiles"
 version = "0.1.0"
 description = ""
-authors = ["Matthew Lonis <mattlonis@gmail.com>"]
+authors = [ "Matthew Lonis <mattlonis@gmail.com>",]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.10"
-pydantic = {version = "^1.10.5", extras = ["dotenv"]}
-
-[tool.poetry.group.test.dependencies]
-greenlet = "^2.0.2"
-pylint = "^2.16.2"
-pylint-junit = "^0.3.2"
-pytest = "^7.2.1"
-pytest-cov = "^4.0.0"
-pytest-xdist = {version = "^3.2.0", extras = ["psutil"]}
-
-[tool.poetry.group.dev.dependencies]
-black = "^23.1.0"
-isort = "^5.12.0"
-pip-tools = "^6.12.2"
-pre-commit = "^3.0.4"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.autopep8]
-max_line_length = 125
-in-place = true
 
 [tool.black]
 line-length = 125
@@ -38,8 +16,32 @@ line-length = 125
 line_length = 125
 profile = "black"
 
+[tool.poetry.dependencies]
+python = "^3.10"
+
 [tool.pytest.ini_options]
 log_cli = false
 log_cli_level = "WARNING"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+
+[tool.poetry.dependencies.pydantic]
+version = "^1.10.5"
+extras = [ "dotenv",]
+
+[tool.poetry.group.test.dependencies]
+greenlet = "^2.0.2"
+pylint = "^2.16.2"
+pylint-junit = "^0.3.2"
+pytest = "^7.2.1"
+pytest-cov = "^4.0.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+isort = "^5.12.0"
+pip-tools = "^6.12.2"
+pre-commit = "^3.0.4"
+
+[tool.poetry.group.test.dependencies.pytest-xdist]
+version = "^3.2.0"
+extras = [ "psutil",]
