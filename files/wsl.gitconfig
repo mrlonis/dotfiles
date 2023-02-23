@@ -7,7 +7,7 @@
 	name = Matthew Lonis
 	email = mattlonis@gmail.com
 [pull]
-	rebase = true
+	rebase = false
 [push]
 	autoSetupRemote = true
 [credential]
