@@ -218,6 +218,17 @@ if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
 	export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Pyenv Setup
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+if [ "$machine" = "Linux" ]; then
+	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
+	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
+	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
+fi
+
 # NVM Setup
 if [ "$machine" = "Linux" ]; then
 	export NVM_DIR="$HOME/.nvm"
