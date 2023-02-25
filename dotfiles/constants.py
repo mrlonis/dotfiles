@@ -17,6 +17,7 @@ FILENAMES = [
     ".profile",
     ".pypirc",
     ".zshrc",
+    ".zprofile",
     "git_pull_all.sh",
     ".aws",
     ".mrlonis_after_setup.sh",
