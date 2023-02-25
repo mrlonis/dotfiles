@@ -1,4 +1,21 @@
 # shellcheck disable=SC2034,SC2155,SC2148
+# Control Logging
+LOG=1
+
+# Determine OS
+unameOut="$(uname -s)"
+case "${unameOut}" in
+Linux*) machine=Linux ;;
+Darwin*) machine=Mac ;;
+CYGWIN*) machine=Cygwin ;;
+MINGW*) machine=MinGw ;;
+*) machine="UNKNOWN:${unameOut}" ;;
+esac
+
+if [ "$LOG" = 1 ]; then
+	echo "Machine: ${machine}"
+fi
+
 # Format this file by running: shfmt -l -w -p .zshrc
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -72,6 +89,13 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+if command -v pyenv >/dev/null; then
+	echo "pyenv Installed! Disabling ohmyzsh virtualenvwrapper venv cd..."
+	DISABLE_VENV_CD=1
+else
+	echo "pyenv not installed! Enabling ohmyzsh virtualenvwrapper venv cd..."
+	DISABLE_VENV_CD=0
+fi
 plugins=(
 	poetry
 	git
@@ -108,9 +132,6 @@ source "$ZSH/oh-my-zsh.sh"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Control Logging
-LOG=1
-
 # zsh settings
 export HISTFILE="$HOME/.zsh_history"
 export HISTFILESIZE=1000000
@@ -120,20 +141,6 @@ export HISTTIMEFORMAT="[%F %T] "
 setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS # Doesn't show duplicate commands using the UP and DOWN arrow keys
 # setopt HIST_IGNORE_ALL_DUPS # Doesn't write duplicate commands to history
-
-# Determine OS
-unameOut="$(uname -s)"
-case "${unameOut}" in
-Linux*) machine=Linux ;;
-Darwin*) machine=Mac ;;
-CYGWIN*) machine=Cygwin ;;
-MINGW*) machine=MinGw ;;
-*) machine="UNKNOWN:${unameOut}" ;;
-esac
-
-if [ "$LOG" = 1 ]; then
-	echo "Machine: ${machine}"
-fi
 
 # WSL Ubuntu Brew Python
 # Potential to use brew env vars
