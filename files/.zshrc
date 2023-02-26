@@ -89,20 +89,29 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-if command -v pyenv >/dev/null; then
-	echo "pyenv Installed! Disabling ohmyzsh virtualenvwrapper venv cd..."
-	DISABLE_VENV_CD=1
-else
-	echo "pyenv not installed! Enabling ohmyzsh virtualenvwrapper venv cd..."
-	DISABLE_VENV_CD=0
+# Brew Setup
+if [ "$machine" = "Linux" ]; then
+	# Had to add this since brew command was not found after a restart
+	# I suspect pyenv has something to do with this but I am unsure
+	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
+	export PATH="$PATH:$BREW_HOME"
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+
 plugins=(
 	poetry
 	git
 	nvm
-	virtualenvwrapper
 	zsh-autosuggestions
 )
+
+pyenv_installed=0
+if command -v pyenv >/dev/null; then
+	pyenv_installed=1
+else
+	echo "pyenv not installed! Enabling virtualenvwrapper ohmyzsh plugin..."
+	plugins+=(virtualenvwrapper)
+fi
 
 source "$ZSH/oh-my-zsh.sh"
 
@@ -165,22 +174,20 @@ else
 	echo "Unknown machine type. Cannot determine python paths"
 fi
 
-# utility-repo-scripts env variables
-# export PYTHON=$PYTHON37 # Used to override Python version for virtual environments
-unset PYTHON
-export VENV_FOLDER_NAME=".venvs"
-
 # virtualenvwrapper Setup
-export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
-export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
-export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
-export PROJECT_HOME="$HOME/Documents/GitHub"
-if [ "$machine" = "Mac" ]; then
-	source /usr/local/bin/virtualenvwrapper.sh
-elif [ "$machine" = "Linux" ]; then
-	source /home/linuxbrew/.linuxbrew/bin/virtualenvwrapper.sh
-else
-	echo "Unknown machine type. Cannot determine virtualenvwrapper.sh location"
+if [ "$pyenv_installed" = 0 ]; then
+	echo "pyenv not installed! Activating virtualenvwrapper..."
+	export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
+	export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
+	export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
+	export PROJECT_HOME="$HOME/Documents/GitHub"
+	if [ "$machine" = "Mac" ]; then
+		source /usr/local/bin/virtualenvwrapper.sh
+	elif [ "$machine" = "Linux" ]; then
+		source /home/linuxbrew/.linuxbrew/bin/virtualenvwrapper.sh
+	else
+		echo "Unknown machine type. Cannot determine virtualenvwrapper.sh location"
+	fi
 fi
 
 # aliases
