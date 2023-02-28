@@ -175,12 +175,12 @@ else
 fi
 
 # virtualenvwrapper Setup
+export PROJECT_HOME="$HOME/Documents/GitHub"
 if [ "$pyenv_installed" = 0 ]; then
 	echo "pyenv not installed! Activating virtualenvwrapper..."
 	export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
 	export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
 	export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
-	export PROJECT_HOME="$HOME/Documents/GitHub"
 	if [ "$machine" = "Mac" ]; then
 		source /usr/local/bin/virtualenvwrapper.sh
 	elif [ "$machine" = "Linux" ]; then
