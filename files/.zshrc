@@ -99,7 +99,7 @@ if [ "$machine" = "Linux" ]; then
 fi
 
 env_zsh_exists=0
-if [ ! -d "$ZSH_CUSTOM/plugins/env" ]; then
+if [ ! -d "${ZSH_CUSTOM:-"$HOME/.oh-my-zsh/custom"}/plugins/env" ]; then
 	echo "Cloning env-zsh plugin..."
 	git clone https://github.com/johnhamelink/env-zsh.git "${ZSH_CUSTOM:-"$HOME/.oh-my-zsh/custom"}/plugins/env"
 else
