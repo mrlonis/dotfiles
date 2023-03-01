@@ -98,6 +98,15 @@ if [ "$machine" = "Linux" ]; then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+env_zsh_exists=0
+if [ ! -d "$ZSH_CUSTOM/plugins/env" ]; then
+	echo "Cloning env-zsh plugin..."
+	git clone https://github.com/johnhamelink/env-zsh.git "${ZSH_CUSTOM:-"~/.oh-my-zsh/custom"}/plugins/env"
+else
+	echo "env-zsh plugin already exists!"
+	env_zsh_exists=1
+fi
+
 plugins=(
 	poetry
 	git
@@ -111,6 +120,11 @@ if command -v pyenv >/dev/null; then
 else
 	echo "pyenv not installed! Enabling virtualenvwrapper ohmyzsh plugin..."
 	plugins+=(virtualenvwrapper)
+fi
+
+if [ "$env_zsh_exists" = 1 ]; then
+	echo "Enabling env-zsh plugin..."
+	plugins+=(env)
 fi
 
 source "$ZSH/oh-my-zsh.sh"
