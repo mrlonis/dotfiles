@@ -101,7 +101,7 @@ fi
 env_zsh_exists=0
 if [ ! -d "$ZSH_CUSTOM/plugins/env" ]; then
 	echo "Cloning env-zsh plugin..."
-	git clone https://github.com/johnhamelink/env-zsh.git "${ZSH_CUSTOM:-"~/.oh-my-zsh/custom"}/plugins/env"
+	git clone https://github.com/johnhamelink/env-zsh.git "${ZSH_CUSTOM:-"$HOME/.oh-my-zsh/custom"}/plugins/env"
 else
 	echo "env-zsh plugin already exists!"
 	env_zsh_exists=1
