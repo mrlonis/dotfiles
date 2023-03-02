@@ -106,6 +106,7 @@ plugins=(
 	zsh-autosuggestions
 )
 
+# Determine if pyenv is installed
 pyenv_installed=0
 if command -v pyenv >/dev/null; then
 	pyenv_installed=1

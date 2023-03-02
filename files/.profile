@@ -2,6 +2,9 @@
 # shellcheck disable=SC2034,SC2148,SC2155
 # Format this file by running: shfmt -l -w -p .profile
 
+# Control Logging
+LOG=1
+
 # Determine OS
 unameOut="$(uname -s)"
 case "${unameOut}" in
@@ -11,6 +14,7 @@ CYGWIN*) machine=Cygwin ;;
 MINGW*) machine=MinGw ;;
 *) machine="UNKNOWN:${unameOut}" ;;
 esac
+
 if [ "$LOG" = 1 ]; then
 	echo "Machine: ${machine}"
 fi
@@ -43,64 +47,44 @@ if [ "$machine" = "Linux" ]; then
 	if [ -d "$HOME/.local/bin" ]; then
 		PATH="$HOME/.local/bin:$PATH"
 	fi
+fi
+
+# Determine if pyenv is installed
+pyenv_installed=0
+if command -v pyenv >/dev/null; then
+	pyenv_installed=1
+fi
+
+# WSL Ubuntu Brew Python
+# Potential to use brew env vars
+# HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+# HOMEBREW_CELLAR=/home/linuxbrew/.linuxbrew/Cellar
+# HOMEBREW_REPOSITORY=/home/linuxbrew/.linuxbrew/Homebrew
+#
+# Only HOMEBREW_PREFIX seems to exist on Mac
+if [ "$machine" = "Linux" ]; then
+	PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
+	PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
+	PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
+	PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.10_1/bin/python3.10"
+	PYTHON311="/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.2_1/bin/python3.11"
+elif [ "$machine" = "Mac" ]; then
+	PYTHON37="/usr/local/Cellar/python@3.7/3.7.16/bin/python3.7"
+	PYTHON38="/usr/local/Cellar/python@3.8/3.8.16/bin/python3.8"
+	PYTHON39="/usr/local/Cellar/python@3.9/3.9.16/bin/python3.9"
+	PYTHON310="/usr/local/Cellar/python@3.10/3.10.10_1/bin/python3.10"
+	PYTHON311="/usr/local/Cellar/python@3.11/3.11.2_1/bin/python3.11"
 else
-	# Control Logging
-	LOG=1
+	echo "Unknown machine type. Cannot determine python paths"
+fi
 
-	# zsh settings
-	export HISTFILE="$HOME/.zsh_history"
-	export HISTFILESIZE=1000000
-	export HISTSIZE=1000000
-	setopt INC_APPEND_HISTORY
-	export HISTTIMEFORMAT="[%F %T] "
-	setopt EXTENDED_HISTORY
-	setopt HIST_FIND_NO_DUPS # Doesn't show duplicate commands using the UP and DOWN arrow keys
-	# setopt HIST_IGNORE_ALL_DUPS # Doesn't write duplicate commands to history
-
-	# Determine OS
-	unameOut="$(uname -s)"
-	case "${unameOut}" in
-	Linux*) machine=Linux ;;
-	Darwin*) machine=Mac ;;
-	CYGWIN*) machine=Cygwin ;;
-	MINGW*) machine=MinGw ;;
-	*) machine="UNKNOWN:${unameOut}" ;;
-	esac
-	if [ "$LOG" = 1 ]; then
-		echo "Machine: ${machine}"
-	fi
-
-	# WSL Ubuntu Brew Python
-	# Potential to use brew env vars
-	# HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
-	# HOMEBREW_CELLAR=/home/linuxbrew/.linuxbrew/Cellar
-	# HOMEBREW_REPOSITORY=/home/linuxbrew/.linuxbrew/Homebrew
-	#
-	# Only HOMEBREW_PREFIX seems to exist on Mac
-	if [ "$machine" = "Linux" ]; then
-		PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
-		PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
-		PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
-		PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.10/bin/python3.10"
-	elif [ "$machine" = "Mac" ]; then
-		PYTHON37="/usr/local/Cellar/python@3.7/3.7.16/bin/python3.7"
-		PYTHON38="/usr/local/Cellar/python@3.8/3.8.16/bin/python3.8"
-		PYTHON39="/usr/local/Cellar/python@3.9/3.9.16/bin/python3.9"
-		PYTHON310="/usr/local/Cellar/python@3.10/3.10.10/bin/python3.10"
-	else
-		echo "Unknown machine type. Cannot determine python paths"
-	fi
-
-	# utility-repo-scripts env variables
-	# export PYTHON=$PYTHON37 # Used to override Python version for virtual environments
-	unset PYTHON
-	export VENV_FOLDER_NAME=".venvs"
-
-	# virtualenvwrapper Setup
+# virtualenvwrapper Setup
+export PROJECT_HOME="$HOME/Documents/GitHub"
+if [ "$pyenv_installed" = 0 ]; then
+	echo "pyenv not installed! Activating virtualenvwrapper..."
 	export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
 	export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
 	export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
-	export PROJECT_HOME="$HOME/Documents/GitHub"
 	if [ "$machine" = "Mac" ]; then
 		source /usr/local/bin/virtualenvwrapper.sh
 	elif [ "$machine" = "Linux" ]; then
@@ -108,50 +92,70 @@ else
 	else
 		echo "Unknown machine type. Cannot determine virtualenvwrapper.sh location"
 	fi
+fi
 
-	# aliases
-	if [ $LOG = 1 ]; then
-		echo "Creating alias laws"
-	fi
-	alias laws='aws --endpoint-url=http://localhost:4566'
+# aliases
+if [ $LOG = 1 ]; then
+	echo "Creating alias laws"
+fi
+alias laws='aws --endpoint-url=http://localhost:4566'
 
-	if [ $LOG = 1 ]; then
-		echo "Creating alias mrlonis"
-	fi
-	export MRLONIS_HOME="$PROJECT_HOME/mrlonis"
-	alias mrlonis='cd $MRLONIS_HOME'
+if [ $LOG = 1 ]; then
+	echo "Creating alias mrlonis"
+fi
+export MRLONIS_HOME="$PROJECT_HOME/mrlonis"
+alias mrlonis='cd $MRLONIS_HOME'
 
-	if [ $LOG = 1 ]; then
-		echo "Creating alias salessync"
-	fi
-	export SALESSYNC_HOME="$PROJECT_HOME/salessync"
-	alias salessync='cd $SALESSYNC_HOME'
+if [ $LOG = 1 ]; then
+	echo "Creating alias salessync"
+fi
+export SALESSYNC_HOME="$PROJECT_HOME/salessync"
+alias salessync='cd $SALESSYNC_HOME'
 
-	# Mac
-	if [ "$machine" = "Mac" ]; then
-		defaults write .GlobalPreferences com.apple.mouse.scaling -1
-		defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-		defaults write com.apple.Finder AppleShowAllFiles true
-	fi
+# Mac
+if [ "$machine" = "Mac" ]; then
+	defaults write .GlobalPreferences com.apple.mouse.scaling -1
+	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+	defaults write com.apple.Finder AppleShowAllFiles true
+fi
 
-	# aws
-	export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
-	export AWS_SECRET_ACCESS_KEY=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
+# aws
+export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
+export AWS_SECRET_ACCESS_KEY=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
 
-	# Ruby Setup
-	export PATH="/usr/local/opt/ruby/bin:$PATH"
+# Ruby Setup
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 
-	## rbenv setup
-	export PATH="$HOME/.rbenv/bin:$PATH"
-	eval "$(rbenv init - zsh)"
+## rbenv setup
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
-	# NVM Setup
-	if [ "$machine" = "Linux" ]; then
-		export NVM_DIR="$HOME/.nvm"
-		[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-		[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-	elif [ "$machine" = "Mac" ]; then
-		export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-		[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-	fi
+# Poetry Setup
+if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+	export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Pyenv Setup
+export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+if [ "$machine" = "Linux" ]; then
+	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
+	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
+	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
+fi
+
+# NVM Setup
+if [ "$machine" = "Linux" ]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+elif [ "$machine" = "Mac" ]; then
+	export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 fi

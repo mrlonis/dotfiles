@@ -1,4 +1,7 @@
-# shellcheck disable=SC2148
+# shellcheck disable=SC2148,SC2155
+# Control Logging
+LOG=1
+
 # Determine OS
 unameOut="$(uname -s)"
 case "${unameOut}" in
@@ -22,7 +25,24 @@ if [ "$machine" = "Linux" ]; then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# pyenv Setup
+# aws
+export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
+export AWS_SECRET_ACCESS_KEY=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
+
+# Ruby Setup
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+## rbenv setup
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+
+# Poetry Setup
+if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+	export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Pyenv Setup
 export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -34,4 +54,14 @@ if [ "$machine" = "Linux" ]; then
 	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
 	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
 	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
+fi
+
+# NVM Setup
+if [ "$machine" = "Linux" ]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+elif [ "$machine" = "Mac" ]; then
+	export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 fi
