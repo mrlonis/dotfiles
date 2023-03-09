@@ -106,22 +106,12 @@ fi
 export MRLONIS_HOME="$PROJECT_HOME/mrlonis"
 alias mrlonis='cd $MRLONIS_HOME'
 
-if [ $LOG = 1 ]; then
-	echo "Creating alias salessync"
-fi
-export SALESSYNC_HOME="$PROJECT_HOME/salessync"
-alias salessync='cd $SALESSYNC_HOME'
-
 # Mac
 if [ "$machine" = "Mac" ]; then
 	defaults write .GlobalPreferences com.apple.mouse.scaling -1
 	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 	defaults write com.apple.Finder AppleShowAllFiles true
 fi
-
-# aws
-export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
-export AWS_SECRET_ACCESS_KEY=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
 
 # Ruby Setup
 export PATH="/usr/local/opt/ruby/bin:$PATH"

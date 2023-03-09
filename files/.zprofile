@@ -25,10 +25,6 @@ if [ "$machine" = "Linux" ]; then
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# aws
-export AWS_ACCESS_KEY_ID=AKIA2C4LUUR7GQMFQ2GH
-export AWS_SECRET_ACCESS_KEY=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
-
 # Ruby Setup
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 

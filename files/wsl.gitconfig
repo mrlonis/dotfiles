@@ -10,7 +10,7 @@
 	rebase = false
 [push]
 	autoSetupRemote = true
-[credential]
-	helper = store
 [init]
 	defaultBranch = main
+[credential]
+	helper = store
