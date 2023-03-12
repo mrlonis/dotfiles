@@ -12,5 +12,7 @@
 	autoSetupRemote = true
 [init]
 	defaultBranch = main
+[core]
+	longpaths = true
 [credential]
 	helper = store
