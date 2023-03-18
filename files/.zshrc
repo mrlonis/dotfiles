@@ -193,6 +193,7 @@ if [ "$pyenv_installed" = 0 ]; then
 fi
 
 # aliases
+current_directory="$PWD"
 if [ $LOG = 1 ]; then
 	echo "Creating alias laws"
 fi
@@ -218,6 +219,12 @@ if [ $LOG = 1 ]; then
 	echo "Creating alias pipxupdate"
 fi
 alias pipxupdate='pipx upgrade-all'
+
+if [ "$current_directory" = "$HOME" ]; then
+	sysupdate
+	brewupdate
+	pipxupdate
+fi
 
 if [ $LOG = 1 ]; then
 	echo "Creating alias update"
