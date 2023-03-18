@@ -204,6 +204,26 @@ fi
 export MRLONIS_HOME="$PROJECT_HOME/mrlonis"
 alias mrlonis='cd $MRLONIS_HOME'
 
+if [ $LOG = 1 ]; then
+	echo "Creating alias sysupdate"
+fi
+alias sysupdate='sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get dist-upgrade && sudo apt -y autoremove'
+
+if [ $LOG = 1 ]; then
+	echo "Creating alias brewupdate"
+fi
+alias brewupdate='brew update && brew upgrade && brew cleanup && brew doctor'
+
+if [ $LOG = 1 ]; then
+	echo "Creating alias pipxupdate"
+fi
+alias pipxupdate='pipx upgrade-all'
+
+if [ $LOG = 1 ]; then
+	echo "Creating alias update"
+fi
+alias update='sysupdate && brewupdate && pipxupdate'
+
 # Mac
 if [ "$machine" = "Mac" ]; then
 	defaults write .GlobalPreferences com.apple.mouse.scaling -1
