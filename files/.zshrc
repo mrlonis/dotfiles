@@ -205,10 +205,12 @@ fi
 export MRLONIS_HOME="$PROJECT_HOME/mrlonis"
 alias mrlonis='cd $MRLONIS_HOME'
 
-if [ $LOG = 1 ]; then
-	echo "Creating alias sysupdate"
+if [ "$machine" = "Linux" ]; then
+	if [ $LOG = 1 ]; then
+		echo "Creating alias sysupdate"
+	fi
+	alias sysupdate='sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get dist-upgrade && sudo apt -y autoremove'
 fi
-alias sysupdate='sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get dist-upgrade && sudo apt -y autoremove'
 
 if [ $LOG = 1 ]; then
 	echo "Creating alias brewupdate"
@@ -221,7 +223,9 @@ fi
 alias pipxupdate='pipx upgrade-all'
 
 if [ "$current_directory" = "$HOME" ]; then
-	sysupdate
+	if [ "$machine" = "Linux" ]; then
+		sysupdate
+	fi
 	brewupdate
 	pipxupdate
 fi
@@ -229,7 +233,11 @@ fi
 if [ $LOG = 1 ]; then
 	echo "Creating alias update"
 fi
-alias update='sysupdate && brewupdate && pipxupdate'
+if [ "$machine" = "Linux" ]; then
+	alias update='sysupdate && pipxupdate && brewupdate'
+else
+	alias update='pipxupdate && brewupdate'
+fi
 
 # Mac
 if [ "$machine" = "Mac" ]; then
