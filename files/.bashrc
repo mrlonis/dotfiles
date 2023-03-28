@@ -230,6 +230,11 @@ if [ "$machine" = "Linux" ]; then
 	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
 fi
 
+# Java
+if [ "$machine" = "Linux" ]; then
+	export JAVA_HOME="/usr/lib/jvm/java-17-oracle"
+fi
+
 # NVM Setup
 if [ "$machine" = "Linux" ]; then
 	export NVM_DIR="$HOME/.nvm"

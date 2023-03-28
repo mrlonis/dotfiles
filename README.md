@@ -11,7 +11,7 @@ To setup the repository, run `./setup` and activate the virtual environment the 
 To run the dotfiles synchronizer, execute the following command in the virtual environment:
 
 ```shell
-python util.py
+poetry run python util.py
 ```
 
 ## Testing
@@ -19,7 +19,7 @@ python util.py
 To run the tests, execute the following command:
 
 ```shell
-pytest --cov --cov-report=html -n auto
+poetry run pytest --cov --cov-report=html -n auto
 ```
 
 ## Linting
@@ -27,7 +27,8 @@ pytest --cov --cov-report=html -n auto
 To run the linter, execute the following command:
 
 ```shell
-pylint dotfiles tests
+poetry run flake8 dotfiles tests
+poetry run pylint dotfiles tests
 ```
 
 ## Printing Links in Terminal
