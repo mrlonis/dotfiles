@@ -107,6 +107,14 @@ plugins=(
 	zsh-autosuggestions
 )
 
+# Pyenv Setup
+export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 # Determine if pyenv is installed
 pyenv_installed=0
 if command -v pyenv >/dev/null; then
@@ -162,6 +170,7 @@ setopt HIST_FIND_NO_DUPS # Doesn't show duplicate commands using the UP and DOWN
 #
 # Only HOMEBREW_PREFIX seems to exist on Mac
 if [ "$machine" = "Linux" ]; then
+	echo "Skipping Python setup for Linux since we are moving away from brew on Linux"
 	# PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
 	# PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
 	# PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
@@ -259,9 +268,9 @@ if [ "$machine" = "Mac" ]; then
 fi
 
 # Poetry Setup
-# if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
-# 	export PATH="$HOME/.local/bin:$PATH"
-# fi
+if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+	export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # Pyenv Setup
 export PYENV_ROOT="$HOME/.pyenv"
