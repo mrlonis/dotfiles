@@ -17,13 +17,13 @@ if [ "$LOG" = 1 ]; then
 fi
 
 # Brew Setup
-if [ "$machine" = "Linux" ]; then
-	# Had to add this since brew command was not found after a restart
-	# I suspect pyenv has something to do with this but I am unsure
-	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
-	export PATH="$PATH:$BREW_HOME"
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+# if [ "$machine" = "Linux" ]; then
+# 	# Had to add this since brew command was not found after a restart
+# 	# I suspect pyenv has something to do with this but I am unsure
+# 	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
+# 	export PATH="$PATH:$BREW_HOME"
+# 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# fi
 
 # Ruby Setup
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -31,12 +31,14 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 ## rbenv setup
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+if [ "$machine" = "Mac" ]; then
+	export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+fi
 
 # Poetry Setup
-if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
-	export PATH="$HOME/.local/bin:$PATH"
-fi
+# if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+# 	export PATH="$HOME/.local/bin:$PATH"
+# fi
 
 # Pyenv Setup
 export PYENV_ROOT="$HOME/.pyenv"
@@ -46,16 +48,16 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-if [ "$machine" = "Linux" ]; then
-	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
-	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
-	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
-fi
+# if [ "$machine" = "Linux" ]; then
+# 	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
+# 	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
+# 	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
+# fi
 
 # Java
-if [ "$machine" = "Linux" ]; then
-	export JAVA_HOME="/usr/lib/jvm/java-17-oracle"
-fi
+# if [ "$machine" = "Linux" ]; then
+# 	export JAVA_HOME="/usr/lib/jvm/java-17-oracle"
+# fi
 
 # NVM Setup
 if [ "$machine" = "Linux" ]; then

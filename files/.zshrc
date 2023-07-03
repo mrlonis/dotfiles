@@ -89,14 +89,15 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
 # Brew Setup
-if [ "$machine" = "Linux" ]; then
-	# Had to add this since brew command was not found after a restart
-	# I suspect pyenv has something to do with this but I am unsure
-	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
-	export PATH="$PATH:$BREW_HOME"
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+# if [ "$machine" = "Linux" ]; then
+# 	# Had to add this since brew command was not found after a restart
+# 	# I suspect pyenv has something to do with this but I am unsure
+# 	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
+# 	export PATH="$PATH:$BREW_HOME"
+# 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# fi
 
 plugins=(
 	poetry
@@ -161,11 +162,11 @@ setopt HIST_FIND_NO_DUPS # Doesn't show duplicate commands using the UP and DOWN
 #
 # Only HOMEBREW_PREFIX seems to exist on Mac
 if [ "$machine" = "Linux" ]; then
-	PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
-	PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
-	PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
-	PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.10_1/bin/python3.10"
-	PYTHON311="/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.2_1/bin/python3.11"
+	# PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
+	# PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
+	# PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
+	# PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.10_1/bin/python3.10"
+	# PYTHON311="/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.2_1/bin/python3.11"
 elif [ "$machine" = "Mac" ]; then
 	PYTHON37="/usr/local/Cellar/python@3.7/3.7.16/bin/python3.7"
 	PYTHON38="/usr/local/Cellar/python@3.8/3.8.16/bin/python3.8"
@@ -178,19 +179,19 @@ fi
 
 # virtualenvwrapper Setup
 export PROJECT_HOME="$HOME/Documents/GitHub"
-if [ "$pyenv_installed" = 0 ]; then
-	echo "pyenv not installed! Activating virtualenvwrapper..."
-	export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
-	export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
-	export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
-	if [ "$machine" = "Mac" ]; then
-		source /usr/local/bin/virtualenvwrapper.sh
-	elif [ "$machine" = "Linux" ]; then
-		source /home/linuxbrew/.linuxbrew/bin/virtualenvwrapper.sh
-	else
-		echo "Unknown machine type. Cannot determine virtualenvwrapper.sh location"
-	fi
-fi
+# if [ "$pyenv_installed" = 0 ]; then
+# 	echo "pyenv not installed! Activating virtualenvwrapper..."
+# 	export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
+# 	export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
+# 	export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
+# 	if [ "$machine" = "Mac" ]; then
+# 		source /usr/local/bin/virtualenvwrapper.sh
+# 	elif [ "$machine" = "Linux" ]; then
+# 		source /home/linuxbrew/.linuxbrew/bin/virtualenvwrapper.sh
+# 	else
+# 		echo "Unknown machine type. Cannot determine virtualenvwrapper.sh location"
+# 	fi
+# fi
 
 # aliases
 current_directory="$PWD"
@@ -209,7 +210,7 @@ if [ "$machine" = "Linux" ]; then
 	if [ $LOG = 1 ]; then
 		echo "Creating alias sysupdate"
 	fi
-	alias sysupdate='sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get dist-upgrade && sudo apt -y autoremove'
+	alias sysupdate='sudo apt update && sudo apt -y upgrade && sudo apt dist-upgrade && sudo apt -y autoremove'
 fi
 
 if [ $LOG = 1 ]; then
@@ -225,8 +226,9 @@ alias pipxupdate='pipx upgrade-all'
 if [ "$current_directory" = "$HOME" ]; then
 	if [ "$machine" = "Linux" ]; then
 		sysupdate
+	else
+		brewupdate
 	fi
-	brewupdate
 	pipxupdate
 fi
 
@@ -234,7 +236,7 @@ if [ $LOG = 1 ]; then
 	echo "Creating alias update"
 fi
 if [ "$machine" = "Linux" ]; then
-	alias update='sysupdate && pipxupdate && brewupdate'
+	alias update='sysupdate && pipxupdate'
 else
 	alias update='pipxupdate && brewupdate'
 fi
@@ -252,12 +254,14 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 ## rbenv setup
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+if [ "$machine" = "Mac" ]; then
+	export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+fi
 
 # Poetry Setup
-if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
-	export PATH="$HOME/.local/bin:$PATH"
-fi
+# if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+# 	export PATH="$HOME/.local/bin:$PATH"
+# fi
 
 # Pyenv Setup
 export PYENV_ROOT="$HOME/.pyenv"
@@ -267,16 +271,16 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-if [ "$machine" = "Linux" ]; then
-	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
-	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
-	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
-fi
+# if [ "$machine" = "Linux" ]; then
+# 	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
+# 	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
+# 	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
+# fi
 
 # Java
-if [ "$machine" = "Linux" ]; then
-	export JAVA_HOME="/usr/lib/jvm/java-17-oracle"
-fi
+# if [ "$machine" = "Linux" ]; then
+# 	export JAVA_HOME="/usr/lib/jvm/java-17-oracle"
+# fi
 
 # NVM Setup
 if [ "$machine" = "Linux" ]; then
