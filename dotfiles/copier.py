@@ -1,3 +1,4 @@
+"""This file contains all logic related to copying."""
 import os
 import shutil
 from pathlib import Path
@@ -13,6 +14,7 @@ def copy_dot_files(
     log: bool = False,
     test: bool = False,
 ):
+    """Copy dotfiles to the destination folder."""
     if os.path.isdir(destination_folder):
         if log:
             print(f"Copying files to folder: {destination_folder}")

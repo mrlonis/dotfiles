@@ -1,3 +1,4 @@
+"""This file contains the tests for the symlinker module."""
 from os import getenv
 
 from dotfiles.constants import get_file_inputs
@@ -6,6 +7,7 @@ from dotfiles.symlinker import create_symlinks
 
 
 def test_symlinker():
+    """Test the create_symlinks function."""
     print("test_symlinker(): Starting...")
 
     destination_folder = getenv("HOME")

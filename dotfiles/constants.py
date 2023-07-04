@@ -1,3 +1,4 @@
+"""Constants for the dotfiles package."""
 import sys
 
 from dotfiles.models import FileInput, FileMode

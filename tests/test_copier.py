@@ -1,3 +1,4 @@
+"""This file contains the tests for the copier module."""
 from os import getenv
 from pathlib import Path
 
@@ -7,6 +8,7 @@ from dotfiles.models import FileMode
 
 
 def test_copier():
+    """Test the copy_dot_files function."""
     print("test_copier(): Starting...")
     source_folder = getenv("HOME")
     assert source_folder is not None
