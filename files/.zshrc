@@ -219,7 +219,7 @@ if [ "$machine" = "Linux" ]; then
 	if [ $LOG = 1 ]; then
 		echo "Creating alias sysupdate"
 	fi
-	alias sysupdate='sudo apt update && sudo apt -y upgrade && sudo apt dist-upgrade && sudo apt -y autoremove'
+	alias sysupdate='sudo apt update && sudo apt -y upgrade && sudo apt -y dist-upgrade && sudo apt -y autoremove'
 fi
 
 if [ $LOG = 1 ]; then
