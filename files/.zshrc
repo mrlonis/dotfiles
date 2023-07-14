@@ -1,4 +1,4 @@
-# shellcheck disable=SC2034,SC2155,SC2148
+# shellcheck disable=SC2034,SC2155,SC2148,SC1090
 # Control Logging
 LOG=1
 
@@ -300,3 +300,6 @@ elif [ "$machine" = "Mac" ]; then
 	export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 fi
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
