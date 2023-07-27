@@ -287,9 +287,9 @@ eval "$(pyenv virtualenv-init -)"
 # fi
 
 # Java
-# if [ "$machine" = "Linux" ]; then
-# 	export JAVA_HOME="/usr/lib/jvm/java-17-oracle"
-# fi
+if [ "$machine" = "Linux" ]; then
+	export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/bin/java
+fi
 
 # NVM Setup
 if [ "$machine" = "Linux" ]; then
