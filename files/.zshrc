@@ -303,4 +303,13 @@ elif [ "$machine" = "Mac" ]; then
 fi
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+if command -v ng &>/dev/null; then
+	source <(ng completion script)
+else
+	if command -v npm &>/dev/null; then
+		npm i -g @angular/cli
+		source <(ng completion script)
+	else
+		echo "npm not installed. Cannot install Angular CLI"
+	fi
+fi
