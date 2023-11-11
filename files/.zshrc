@@ -293,6 +293,7 @@ if [ "$machine" = "Linux" ]; then
 fi
 
 # NVM Setup
+export NVM_SYMLINK_CURRENT=true
 if [ "$machine" = "Linux" ]; then
 	export NVM_DIR="$HOME/.nvm"
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
