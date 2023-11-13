@@ -1,4 +1,4 @@
-# shellcheck disable=SC2034,SC2155,SC2148,SC1090
+# shellcheck disable=SC2034,SC2155,SC2148,SC1090,SC2139
 # Control Logging
 LOG=1
 
@@ -290,6 +290,19 @@ eval "$(pyenv virtualenv-init -)"
 if [ "$machine" = "Linux" ]; then
 	export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 	export PATH="$JAVA_HOME:$PATH"
+elif [ "$machine" = "Mac" ]; then
+	export JAVA_HOME=$(/usr/libexec/java_home)
+	export PATH="$JAVA_HOME:$PATH"
+
+	###############
+	# Java Switcher
+	###############
+	alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8); java -version"
+	alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11); java -version"
+	alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17); java -version"
+
+	# Set java 8 as default
+	export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 fi
 
 # NVM Setup
