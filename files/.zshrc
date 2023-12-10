@@ -91,13 +91,11 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # Add wisely, as too many plugins slow down shell startup.
 
 # Brew Setup
-# if [ "$machine" = "Linux" ]; then
-# 	# Had to add this since brew command was not found after a restart
-# 	# I suspect pyenv has something to do with this but I am unsure
-# 	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
-# 	export PATH="$PATH:$BREW_HOME"
-# 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# fi
+if [ "$machine" = "Linux" ]; then
+	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
+	export PATH="$PATH:$BREW_HOME"
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 plugins=(
 	poetry
@@ -162,45 +160,7 @@ setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS # Doesn't show duplicate commands using the UP and DOWN arrow keys
 # setopt HIST_IGNORE_ALL_DUPS # Doesn't write duplicate commands to history
 
-# WSL Ubuntu Brew Python
-# Potential to use brew env vars
-# HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
-# HOMEBREW_CELLAR=/home/linuxbrew/.linuxbrew/Cellar
-# HOMEBREW_REPOSITORY=/home/linuxbrew/.linuxbrew/Homebrew
-#
-# Only HOMEBREW_PREFIX seems to exist on Mac
-if [ "$machine" = "Linux" ]; then
-	echo "Skipping Python setup for Linux since we are moving away from brew on Linux"
-	# PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
-	# PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
-	# PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
-	# PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.10_1/bin/python3.10"
-	# PYTHON311="/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.2_1/bin/python3.11"
-elif [ "$machine" = "Mac" ]; then
-	PYTHON37="/usr/local/Cellar/python@3.7/3.7.16/bin/python3.7"
-	PYTHON38="/usr/local/Cellar/python@3.8/3.8.16/bin/python3.8"
-	PYTHON39="/usr/local/Cellar/python@3.9/3.9.16/bin/python3.9"
-	PYTHON310="/usr/local/Cellar/python@3.10/3.10.10_1/bin/python3.10"
-	PYTHON311="/usr/local/Cellar/python@3.11/3.11.2_1/bin/python3.11"
-else
-	echo "Unknown machine type. Cannot determine python paths"
-fi
-
-# virtualenvwrapper Setup
 export PROJECT_HOME="$HOME/Documents/GitHub"
-# if [ "$pyenv_installed" = 0 ]; then
-# 	echo "pyenv not installed! Activating virtualenvwrapper..."
-# 	export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
-# 	export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
-# 	export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
-# 	if [ "$machine" = "Mac" ]; then
-# 		source /usr/local/bin/virtualenvwrapper.sh
-# 	elif [ "$machine" = "Linux" ]; then
-# 		source /home/linuxbrew/.linuxbrew/bin/virtualenvwrapper.sh
-# 	else
-# 		echo "Unknown machine type. Cannot determine virtualenvwrapper.sh location"
-# 	fi
-# fi
 
 # aliases
 current_directory="$PWD"
@@ -279,12 +239,6 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-
-# if [ "$machine" = "Linux" ]; then
-# 	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
-# 	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
-# 	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
-# fi
 
 # Java
 if [ "$machine" = "Linux" ]; then
