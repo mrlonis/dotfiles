@@ -137,6 +137,13 @@ if [ "$machine" = "Linux" ]; then
 			. /etc/bash_completion
 		fi
 	fi
+
+	# Brew Setup
+	if [ "$machine" = "Linux" ]; then
+		export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
+		export PATH="$PATH:$BREW_HOME"
+		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+	fi
 fi
 
 # Determine if pyenv is installed

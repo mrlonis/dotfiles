@@ -30,6 +30,13 @@ if [ "$machine" = "Linux" ]; then
 	# for ssh logins, install and configure the libpam-umask package.
 	#umask 022
 
+	# Brew Setup
+	if [ "$machine" = "Linux" ]; then
+		export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
+		export PATH="$PATH:$BREW_HOME"
+		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+	fi
+
 	# if running bash
 	if [ -n "$BASH_VERSION" ]; then
 		# include .bashrc if it exists
