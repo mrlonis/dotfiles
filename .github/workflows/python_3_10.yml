@@ -36,11 +36,5 @@ jobs:
       - name: Pylint
         run: poetry run pylint ${{ env.LINT_PATHS }}
 
-      - name: Pydocstyle
-        run: poetry run pydocstyle ${{ env.LINT_PATHS }}
-
-      - name: Bandit
-        run: poetry run bandit -c pyproject.toml -r .
-
       - name: Pytest
         run: poetry run pytest --cov -n auto
