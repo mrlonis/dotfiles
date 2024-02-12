@@ -10,12 +10,9 @@ source utility-repo-scripts/setup_python_app.sh \
 	--include_jumanji_house \
 	--include_prettier \
 	--include_isort \
-	--python_formatter=black \
+	--python_formatter="black" \
 	--pylint_enabled \
 	--flake8_enabled \
-	--pydocstyle_enabled \
-	--pycodestyle_enabled \
-	--bandit_enabled \
 	--pytest_enabled \
 	--overwrite_vscode_launch \
 	--line_length=125
