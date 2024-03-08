@@ -259,6 +259,10 @@ elif [ "$machine" = "Mac" ]; then
 	export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 fi
 
+# Maven Setup
+export M2_HOME='/opt/apache-maven-3.9.6'
+export PATH="$M2_HOME/bin:$PATH"
+
 # NVM Setup
 export NVM_SYMLINK_CURRENT=true
 if [ "$machine" = "Linux" ]; then
