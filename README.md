@@ -29,8 +29,6 @@ To run the linter, execute the following command:
 ```shell
 poetry run flake8 dotfiles tests util.py
 poetry run pylint dotfiles tests util.py
-poetry run pydocstyle dotfiles tests util.py
-poetry run bandit -c pyproject.toml -r .
 ```
 
 ## Printing Links in Terminal
