@@ -1,4 +1,5 @@
 """This file contains all logic related to copying."""
+
 import os
 import shutil
 from pathlib import Path
@@ -57,7 +58,9 @@ def _process_file(
 
         if os.path.exists(destination_file_path):
             if overwrite:
-                _copy(source_file_path=source_file_path, destination_file_path=destination_file_path, log=log, test=test)
+                _copy(
+                    source_file_path=source_file_path, destination_file_path=destination_file_path, log=log, test=test
+                )
             else:
                 if log:
                     print(f"{file.filename} exists and overwrite is False")
