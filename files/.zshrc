@@ -185,7 +185,7 @@ fi
 if [ $LOG = 1 ]; then
 	echo "Creating alias brewupdate"
 fi
-alias brewupdate='brew update && brew upgrade && brew cleanup && brew doctor'
+alias brewupdate='brew update && brew upgrade && brew cleanup'
 
 if [ $LOG = 1 ]; then
 	echo "Creating alias pipxupdate"
