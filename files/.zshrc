@@ -113,15 +113,6 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# Determine if pyenv is installed
-pyenv_installed=0
-if command -v pyenv >/dev/null; then
-	pyenv_installed=1
-else
-	echo "pyenv not installed! Enabling virtualenvwrapper ohmyzsh plugin..."
-	plugins+=(virtualenvwrapper)
-fi
-
 source "$ZSH/oh-my-zsh.sh"
 
 # User configuration

@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC1090,SC2015,SC2034,SC2155
+# shellcheck disable=SC1090,SC2015,SC2034,SC2155,SC2139,SC2148
 # Format this file by running: shfmt -l -w -p .bashrc
 
 # Control Logging
@@ -146,52 +146,10 @@ if [ "$machine" = "Linux" ]; then
 	fi
 fi
 
-# Determine if pyenv is installed
-pyenv_installed=0
-if command -v pyenv >/dev/null; then
-	pyenv_installed=1
-fi
-
-# WSL Ubuntu Brew Python
-# Potential to use brew env vars
-# HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
-# HOMEBREW_CELLAR=/home/linuxbrew/.linuxbrew/Cellar
-# HOMEBREW_REPOSITORY=/home/linuxbrew/.linuxbrew/Homebrew
-#
-# Only HOMEBREW_PREFIX seems to exist on Mac
-if [ "$machine" = "Linux" ]; then
-	PYTHON37="/home/linuxbrew/.linuxbrew/Cellar/python@3.7/3.7.16/bin/python3.7"
-	PYTHON38="/home/linuxbrew/.linuxbrew/Cellar/python@3.8/3.8.16/bin/python3.8"
-	PYTHON39="/home/linuxbrew/.linuxbrew/Cellar/python@3.9/3.9.16/bin/python3.9"
-	PYTHON310="/home/linuxbrew/.linuxbrew/Cellar/python@3.10/3.10.10_1/bin/python3.10"
-	PYTHON311="/home/linuxbrew/.linuxbrew/Cellar/python@3.11/3.11.2_1/bin/python3.11"
-elif [ "$machine" = "Mac" ]; then
-	PYTHON37="/usr/local/Cellar/python@3.7/3.7.16/bin/python3.7"
-	PYTHON38="/usr/local/Cellar/python@3.8/3.8.16/bin/python3.8"
-	PYTHON39="/usr/local/Cellar/python@3.9/3.9.16/bin/python3.9"
-	PYTHON310="/usr/local/Cellar/python@3.10/3.10.10_1/bin/python3.10"
-	PYTHON311="/usr/local/Cellar/python@3.11/3.11.2_1/bin/python3.11"
-else
-	echo "Unknown machine type. Cannot determine python paths"
-fi
-
-# virtualenvwrapper Setup
 export PROJECT_HOME="$HOME/Documents/GitHub"
-if [ "$pyenv_installed" = 0 ]; then
-	echo "pyenv not installed! Activating virtualenvwrapper..."
-	export VIRTUALENVWRAPPER_PYTHON="$PYTHON310"
-	export WORKON_HOME="$HOME/$VENV_FOLDER_NAME"
-	export VIRTUALENVWRAPPER_HOOK_DIR="$WORKON_HOME"
-	if [ "$machine" = "Mac" ]; then
-		source /usr/local/bin/virtualenvwrapper.sh
-	elif [ "$machine" = "Linux" ]; then
-		source /home/linuxbrew/.linuxbrew/bin/virtualenvwrapper.sh
-	else
-		echo "Unknown machine type. Cannot determine virtualenvwrapper.sh location"
-	fi
-fi
 
 # aliases
+current_directory="$PWD"
 if [ $LOG = 1 ]; then
 	echo "Creating alias laws"
 fi
@@ -202,6 +160,41 @@ if [ $LOG = 1 ]; then
 fi
 export MRLONIS_HOME="$PROJECT_HOME/mrlonis"
 alias mrlonis='cd $MRLONIS_HOME'
+
+if [ "$machine" = "Linux" ]; then
+	if [ $LOG = 1 ]; then
+		echo "Creating alias sysupdate"
+	fi
+	alias sysupdate='sudo apt update && sudo apt -y upgrade && sudo apt -y dist-upgrade && sudo apt -y autoremove'
+fi
+
+if [ $LOG = 1 ]; then
+	echo "Creating alias brewupdate"
+fi
+alias brewupdate='brew update && brew upgrade && brew cleanup'
+
+if [ $LOG = 1 ]; then
+	echo "Creating alias pipxupdate"
+fi
+alias pipxupdate='pipx upgrade-all'
+
+if [ "$current_directory" = "$HOME" ]; then
+	if [ "$machine" = "Linux" ]; then
+		sysupdate
+	else
+		brewupdate
+	fi
+	pipxupdate
+fi
+
+if [ $LOG = 1 ]; then
+	echo "Creating alias update"
+fi
+if [ "$machine" = "Linux" ]; then
+	alias update='sysupdate && pipxupdate'
+else
+	alias update='pipxupdate && brewupdate'
+fi
 
 # Mac
 if [ "$machine" = "Mac" ]; then
@@ -216,7 +209,9 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 ## rbenv setup
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+if [ "$machine" = "Mac" ]; then
+	export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+fi
 
 # Poetry Setup
 if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
@@ -231,17 +226,28 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-if [ "$machine" = "Linux" ]; then
-	export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/openssl@3/lib"
-	export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/openssl@3/include"
-	export PKG_CONFIG_PATH="/home/linuxbrew/.linuxbrew/opt/openssl@3/lib/pkgconfig"
-fi
-
 # Java
 if [ "$machine" = "Linux" ]; then
 	export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 	export PATH="$JAVA_HOME:$PATH"
+elif [ "$machine" = "Mac" ]; then
+	export JAVA_HOME=$(/usr/libexec/java_home)
+	export PATH="$JAVA_HOME:$PATH"
+
+	###############
+	# Java Switcher
+	###############
+	alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8); java -version"
+	alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11); java -version"
+	alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17); java -version"
+
+	# Set java 8 as default
+	export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 fi
+
+# Maven Setup
+export M2_HOME='/opt/apache-maven-3.9.6'
+export PATH="$M2_HOME/bin:$PATH"
 
 # NVM Setup
 export NVM_SYMLINK_CURRENT=true
