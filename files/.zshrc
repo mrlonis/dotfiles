@@ -91,11 +91,11 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # Add wisely, as too many plugins slow down shell startup.
 
 # Brew Setup
-if [ "$machine" = "Linux" ]; then
-	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
-	export PATH="$PATH:$BREW_HOME"
-	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+# if [ "$machine" = "Linux" ]; then
+# 	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
+# 	export PATH="$PATH:$BREW_HOME"
+# 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# fi
 
 plugins=(
 	poetry
@@ -151,7 +151,7 @@ setopt EXTENDED_HISTORY
 setopt HIST_FIND_NO_DUPS # Doesn't show duplicate commands using the UP and DOWN arrow keys
 # setopt HIST_IGNORE_ALL_DUPS # Doesn't write duplicate commands to history
 
-export PROJECT_HOME="$HOME/Documents/GitHub"
+export PROJECT_HOME="$HOME/GitHub"
 
 # aliases
 current_directory="$PWD"
