@@ -183,15 +183,6 @@ if [ $LOG = 1 ]; then
 fi
 alias pipxupdate='pipx upgrade-all'
 
-if [ "$current_directory" = "$HOME" ]; then
-	if [ "$machine" = "Linux" ]; then
-		sysupdate
-	else
-		brewupdate
-	fi
-	pipxupdate
-fi
-
 if [ $LOG = 1 ]; then
 	echo "Creating alias update"
 fi
@@ -245,6 +236,7 @@ elif [ "$machine" = "Mac" ]; then
 	alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8); java -version"
 	alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11); java -version"
 	alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17); java -version"
+	alias j21="export JAVA_HOME=$(/usr/libexec/java_home -v 21); java -version"
 
 	# Set java 8 as default
 	export JAVA_HOME=$(/usr/libexec/java_home -v 17)
