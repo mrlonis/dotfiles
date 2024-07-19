@@ -1,5 +1,5 @@
 #!/bin/bash
-for org_dir in "$HOME"/Documents/GitHub/*; do
+for org_dir in "$HOME"/GitHub/*; do
 	echo "Processing GitHub Organization: $org_dir"
 	cd "$org_dir" || return
 
