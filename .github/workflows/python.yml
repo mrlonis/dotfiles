@@ -2,9 +2,9 @@ name: Python 3.12
 
 on:
   push:
-    branches: ['master']
+    branches: ['main']
   pull_request:
-    branches: ['master']
+    branches: ['main']
 
 env:
   PYTHON_VERSION: '3.12'
