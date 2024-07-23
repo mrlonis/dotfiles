@@ -1,4 +1,5 @@
 """This module contains the logic for creating symlinks for the dotfiles."""
+
 import os
 from pathlib import Path
 from typing import Union
@@ -16,6 +17,11 @@ def create_symlinks(
     # pylint: disable=too-many-branches
     if log:
         print(f"Creating symlinks in folder: {destination_folder}")
+    dir_path_exists = os.path.exists(destination_folder)
+    if not dir_path_exists:
+        # Create a new directory because it does not exist
+        os.makedirs(destination_folder)
+        print(f"The new directory ({destination_folder}) is created!")
 
     for file in filenames:
         if log:

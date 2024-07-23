@@ -1,12 +1,13 @@
 """This file is the CLI utility tool to copy and symlink dotfiles."""
+
 # To Run - python util.py
 import os
 from pathlib import Path
 
-from dotfiles.constants import get_file_inputs
+from dotfiles.constants import HUSKY_RC_FILENAME, get_file_inputs
 from dotfiles.copier import copy_dot_files
 from dotfiles.exceptions import DotfilesException
-from dotfiles.models import FileMode
+from dotfiles.models import FileInput, FileMode
 from dotfiles.symlinker import create_symlinks
 
 LOG = True
@@ -29,3 +30,8 @@ copy_dot_files(
 print("----------------------------------")
 print("")
 create_symlinks(destination_folder=HOME, filenames=get_file_inputs(file_mode=FileMode.SYMLINK), log=LOG)
+create_symlinks(
+    destination_folder=HOME + "/.config/husky",
+    filenames=[FileInput(filename=HUSKY_RC_FILENAME, destination_filename="init.sh")],
+    log=LOG,
+)
