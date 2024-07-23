@@ -8,6 +8,10 @@ for org_dir in "$HOME"/GitHub/*; do
 			echo "Processing Project: $project_dir"
 			cd "$project_dir" || return
 			git pull
+			if [ -e .gitmodules ]; then
+				echo "Processing submodules for Project: $project_dir"
+				git submodule update --init --remote --force
+			fi
 		fi
 	done
 done
