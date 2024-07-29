@@ -1,0 +1,44 @@
+name: Python 3.12
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+env:
+  PYTHON_VERSION: '3.12'
+  POETRY_VERSION: '1.8.3'
+  LINT_PATHS: >
+    dotfiles
+    tests
+    util.py
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install poetry
+        run: pipx install poetry==${{ env.POETRY_VERSION }}
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: poetry
+
+      - name: Install Dependencies
+        run: poetry install --no-interaction --no-root --without dev
+        if: steps.cache_dependencies.outputs.cache-hit != 'true'
+
+      - name: Flake8
+        run: poetry run flake8 ${{ env.LINT_PATHS }}
+
+      - name: Pylint
+        run: poetry run pylint ${{ env.LINT_PATHS }}
+
+      - name: Pytest
+        run: poetry run pytest --cov -n auto
