@@ -7,7 +7,7 @@ from pathlib import Path
 from dotfiles.models import FileInput
 
 
-def copy_dot_files(
+def copy_dot_files(  # pylint: disable=too-many-positional-arguments
     source_folder: str | Path,
     destination_folder: str | Path,
     filenames: list[FileInput],
@@ -34,7 +34,7 @@ def copy_dot_files(
             print(f"Destination folder {destination_folder} does not exist")
 
 
-def _process_file(
+def _process_file(  # pylint: disable=too-many-positional-arguments
     source_folder: str | Path,
     destination_folder: str | Path,
     file: FileInput,
