@@ -16,3 +16,5 @@
 	longpaths = true
 [credential]
 	helper = store
+[fetch]
+	prune = true
