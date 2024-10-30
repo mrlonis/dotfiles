@@ -12,6 +12,7 @@ for org_dir in "$HOME"/GitHub/*; do
 				echo "Processing submodules for Project: $project_dir"
 				git submodule update --init --remote --force
 			fi
+                        git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done
 		fi
 	done
 done
