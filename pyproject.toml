@@ -13,7 +13,7 @@ pydantic = { version = "^2.10.4", extras = ["dotenv"] }
 [tool.poetry.group.test.dependencies]
 flake8 = "^7.1.1"
 greenlet = "^3.1.1"
-mypy = "^1.13.0"
+mypy = "^1.14.0"
 pylint = "^3.3.2"
 pylint-junit = "^0.3.2"
 pytest = "^8.3.4"
