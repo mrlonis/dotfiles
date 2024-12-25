@@ -105,14 +105,6 @@ plugins=(
 	zsh-autosuggestions
 )
 
-# Pyenv Setup
-export PYENV_ROOT="$HOME/.pyenv"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
@@ -209,22 +201,21 @@ if [ "$machine" = "Mac" ]; then
 	export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 fi
 
+# Pyenv Setup
+export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
+
 # Poetry Setup
 if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
 	export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Pyenv Setup
-export PYENV_ROOT="$HOME/.pyenv"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 # Java
 if [ "$machine" = "Linux" ]; then
-	export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+	export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
 	export PATH="$JAVA_HOME:$PATH"
 elif [ "$machine" = "Mac" ]; then
 	export JAVA_HOME=$(/usr/libexec/java_home)
