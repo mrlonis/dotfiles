@@ -17,8 +17,8 @@ for org_dir in "$HOME"/GitHub/*; do
 				git checkout "$default_branch"
 			fi
 
-			git fetch -p
-			git pull
+			git fetch --all -p
+			git pull --all
 			if [ -e .gitmodules ]; then
 				git submodule update --init --remote --force
 			fi
