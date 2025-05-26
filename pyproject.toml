@@ -8,7 +8,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.13.1"
-pydantic = { version = "^2.11.4", extras = ["dotenv"] }
+pydantic = { version = "^2.11.5", extras = ["dotenv"] }
 
 [tool.poetry.group.test.dependencies]
 flake8 = "^7.2.0"
