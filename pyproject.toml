@@ -12,11 +12,11 @@ pydantic = { version = "^2.11.5", extras = ["dotenv"] }
 
 [tool.poetry.group.test.dependencies]
 flake8 = "^7.2.0"
-greenlet = "^3.2.2"
+greenlet = "^3.2.3"
 mypy = "^1.16.0"
 pylint = "^3.3.7"
 pylint-junit = "^0.3.5"
-pytest = "^8.3.5"
+pytest = "^8.4.0"
 pytest-cov = "^6.1.1"
 pytest-xdist = { version = "^3.7.0", extras = ["psutil"] }
 tomli = "^2.2.1"
@@ -26,8 +26,8 @@ black = "^25.1.0"
 configupdater = "^3.1.1"
 isort = "^6.0.1"
 pre-commit = "^4.2.0"
-ruamel-yaml = "^0.18.12"
-tomlkit = "^0.13.2"
+ruamel-yaml = "^0.18.14"
+tomlkit = "^0.13.3"
 
 [build-system]
 requires = ["poetry-core"]
