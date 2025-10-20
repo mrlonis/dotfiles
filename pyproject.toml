@@ -14,7 +14,7 @@ pydantic = { version = "^2.12.0", extras = ["dotenv"] }
 flake8 = "^7.3.0"
 greenlet = "^3.2.4"
 mypy = "^1.18.2"
-pylint = "^4.0.0"
+pylint = "^4.0.2"
 pylint-junit = "^0.3.5"
 pytest = "^8.4.2"
 pytest-cov = "^7.0.0"
