@@ -26,7 +26,7 @@ black = "^25.9.0"
 configupdater = "^3.1.1"
 isort = "^7.0.0"
 pre-commit = "^4.3.0"
-ruamel-yaml = "^0.18.15"
+ruamel-yaml = "^0.18.16"
 tomlkit = "^0.13.3"
 
 [build-system]
