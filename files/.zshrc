@@ -228,9 +228,10 @@ elif [ "$machine" = "Mac" ]; then
 	alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11); java -version"
 	alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17); java -version"
 	alias j21="export JAVA_HOME=$(/usr/libexec/java_home -v 21); java -version"
+	alias j25="export JAVA_HOME=$(/usr/libexec/java_home -v 25); java -version"
 
-	# Set java 8 as default
-	export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+	# Set java 25 as default
+	export JAVA_HOME=$(/usr/libexec/java_home -v 25)
 fi
 
 # Maven Setup
@@ -284,7 +285,3 @@ else
 		echo "npm not installed. Cannot install Angular CLI"
 	fi
 fi
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
