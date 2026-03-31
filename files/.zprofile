@@ -34,9 +34,9 @@ if [ "$machine" = "Mac" ]; then
 fi
 
 # Poetry Setup
-# if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
-# 	export PATH="$HOME/.local/bin:$PATH"
-# fi
+if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+	export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # Pyenv Setup
 export PYENV_ROOT="$HOME/.pyenv"
