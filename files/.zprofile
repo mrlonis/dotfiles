@@ -93,3 +93,9 @@ load-nvmrc() {
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+if [ "$machine" = "Linux" ]; then
+	export TMPDIR="/tmp"
+	export TMP="/tmp"
+	export TEMP="/tmp"
+fi
