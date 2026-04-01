@@ -1,4 +1,4 @@
-#!/bin/bash
+# shellcheck disable=SC2034,SC2155,SC2148,SC1090,SC2139
 # Control Logging
 LOG=1
 
@@ -22,6 +22,7 @@ if [ "$machine" = "Linux" ]; then
 	export TEMP="/tmp"
 fi
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/mrlonis/.sdkman"
-[[ -s "/Users/mrlonis/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/mrlonis/.sdkman/bin/sdkman-init.sh"
+# Poetry Setup
+if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+	export PATH="$HOME/.local/bin:$PATH"
+fi

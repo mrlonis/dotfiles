@@ -34,9 +34,9 @@ if [ "$machine" = "Mac" ]; then
 fi
 
 # Poetry Setup
-# if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
-# 	export PATH="$HOME/.local/bin:$PATH"
-# fi
+if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+	export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # Pyenv Setup
 export PYENV_ROOT="$HOME/.pyenv"
@@ -93,3 +93,9 @@ load-nvmrc() {
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+if [ "$machine" = "Linux" ]; then
+	export TMPDIR="/tmp"
+	export TMP="/tmp"
+	export TEMP="/tmp"
+fi

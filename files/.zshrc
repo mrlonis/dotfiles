@@ -285,3 +285,9 @@ else
 		echo "npm not installed. Cannot install Angular CLI"
 	fi
 fi
+
+if [ "$machine" = "Linux" ]; then
+	export TMPDIR="/tmp"
+	export TMP="/tmp"
+	export TEMP="/tmp"
+fi
