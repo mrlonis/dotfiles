@@ -28,6 +28,7 @@ FILENAMES = [
     ".aws",
     ".mrlonis_after_setup.sh",
     ".prettierrc",
+    ".zshenv",
 ]
 
 
