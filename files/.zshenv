@@ -21,3 +21,8 @@ if [ "$machine" = "Linux" ]; then
 	export TMP="/tmp"
 	export TEMP="/tmp"
 fi
+
+# Poetry Setup
+if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
+	export PATH="$HOME/.local/bin:$PATH"
+fi
