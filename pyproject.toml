@@ -14,9 +14,9 @@ pydantic = { version = "^2.13.4", extras = ["dotenv"] }
 flake8 = "^7.3.0"
 greenlet = "^3.5.1"
 mypy = "^2.1.0"
-pylint = "^4.0.5"
+pylint = "^4.0.6"
 pylint-junit = "^0.3.5"
-pytest = "^9.0.3"
+pytest = "^9.1.0"
 pytest-cov = "^7.1.0"
 pytest-xdist = { version = "^3.8.0", extras = ["psutil"] }
 tomli = "^2.4.0"
