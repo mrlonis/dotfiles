@@ -22,6 +22,10 @@ if [ "$machine" = "Linux" ]; then
 	export TEMP="/tmp"
 fi
 
+if [ "$machine" = "Mac" ]; then
+	export CAPACITOR_ANDROID_STUDIO_PATH="/Users/mrlonis/Applications/Android Studio.app"
+fi
+
 # Poetry Setup
 if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
 	export PATH="$HOME/.local/bin:$PATH"
