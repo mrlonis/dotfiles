@@ -189,6 +189,7 @@ if [ "$machine" = "Mac" ]; then
 	defaults write .GlobalPreferences com.apple.mouse.scaling -1
 	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 	defaults write com.apple.Finder AppleShowAllFiles true
+	export CAPACITOR_ANDROID_STUDIO_PATH="/Users/mrlonis/Applications/Android Studio.app"
 fi
 
 # Ruby Setup

@@ -16,6 +16,10 @@ if [ "$LOG" = 1 ]; then
 	echo "Machine: ${machine}"
 fi
 
+if [ "$machine" = "Mac" ]; then
+	export CAPACITOR_ANDROID_STUDIO_PATH="/Users/mrlonis/Applications/Android Studio.app"
+fi
+
 # Brew Setup
 if [ "$machine" = "Linux" ]; then
 	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
