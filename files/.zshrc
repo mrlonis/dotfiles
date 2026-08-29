@@ -1,30 +1,12 @@
-# shellcheck disable=SC2034,SC2155,SC2148,SC1090,SC2139
-# Control Logging
-LOG=1
-
-# Determine OS
-unameOut="$(uname -s)"
-case "${unameOut}" in
-Linux*) machine=Linux ;;
-Darwin*) machine=Mac ;;
-CYGWIN*) machine=Cygwin ;;
-MINGW*) machine=MinGw ;;
-*) machine="UNKNOWN:${unameOut}" ;;
-esac
-
-if [ "$LOG" = 1 ]; then
-	echo "Machine: ${machine}"
-fi
-
-# Format this file by running: shfmt -l -w -p .zshrc
+# shellcheck disable=SC2034,SC2086,SC2139,SC2148,SC2155
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
@@ -48,7 +30,7 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+zstyle ':omz:update' frequency 1
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -89,14 +71,6 @@ zstyle ':omz:update' mode auto # update automatically without asking
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-
-# Brew Setup
-# if [ "$machine" = "Linux" ]; then
-# 	export BREW_HOME="/home/linuxbrew/.linuxbrew/bin"
-# 	export PATH="$PATH:$BREW_HOME"
-# 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# fi
-
 plugins=(
 	poetry
 	git
@@ -105,7 +79,7 @@ plugins=(
 	zsh-autosuggestions
 )
 
-source "$ZSH/oh-my-zsh.sh"
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -118,126 +92,54 @@ source "$ZSH/oh-my-zsh.sh"
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# zsh settings
-export HISTFILE="$HOME/.zsh_history"
-export HISTFILESIZE=1000000
-export HISTSIZE=1000000
-setopt INC_APPEND_HISTORY
-export HISTTIMEFORMAT="[%F %T] "
-setopt EXTENDED_HISTORY
-setopt HIST_FIND_NO_DUPS # Doesn't show duplicate commands using the UP and DOWN arrow keys
-# setopt HIST_IGNORE_ALL_DUPS # Doesn't write duplicate commands to history
-
-export PROJECT_HOME="$HOME/GitHub"
-
-# aliases
-current_directory="$PWD"
-if [ $LOG = 1 ]; then
-	echo "Creating alias laws"
-fi
-alias laws='aws --endpoint-url=http://localhost:4566'
-
-if [ $LOG = 1 ]; then
-	echo "Creating alias mrlonis"
-fi
-export MRLONIS_HOME="$PROJECT_HOME/mrlonis"
-alias mrlonis='cd $MRLONIS_HOME'
-
-if [ "$machine" = "Linux" ]; then
-	if [ $LOG = 1 ]; then
-		echo "Creating alias sysupdate"
-	fi
-	alias sysupdate='sudo apt update && sudo apt -y upgrade && sudo apt -y dist-upgrade && sudo apt -y autoremove'
-fi
-
-if [ $LOG = 1 ]; then
-	echo "Creating alias brewupdate"
-fi
-alias brewupdate='brew update && brew upgrade && brew cleanup'
-
-if [ $LOG = 1 ]; then
-	echo "Creating alias pipxupdate"
-fi
-alias pipxupdate='pipx upgrade-all'
-
-if [ $LOG = 1 ]; then
-	echo "Creating alias update"
-fi
-if [ "$machine" = "Linux" ]; then
-	alias update='sysupdate && pipxupdate'
-else
-	alias update='pipxupdate && brewupdate'
-fi
-
 # Mac
-if [ "$machine" = "Mac" ]; then
-	defaults write .GlobalPreferences com.apple.mouse.scaling -1
-	defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-	defaults write com.apple.Finder AppleShowAllFiles true
-	export CAPACITOR_ANDROID_STUDIO_PATH="/Users/mrlonis/Applications/Android Studio.app"
-fi
-
-# Ruby Setup
-export PATH="/usr/local/opt/ruby/bin:$PATH"
+defaults write .GlobalPreferences com.apple.mouse.scaling -1
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+defaults write com.apple.Finder AppleShowAllFiles true
+export CAPACITOR_ANDROID_STUDIO_PATH="$HOME/Applications/Android Studio.app"
 
 ## rbenv setup
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
-if [ "$machine" = "Mac" ]; then
-	export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
-fi
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
 # Pyenv Setup
 export PYENV_ROOT="$HOME/.pyenv"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
-eval "$(pyenv virtualenv-init -)"
 
-# Poetry Setup
-if [ "$machine" = "Linux" ] || [ "$machine" = "Mac" ]; then
-	export PATH="$HOME/.local/bin:$PATH"
-fi
+# Pipx / Poetry Setup
+export PATH="$PATH:$HOME/.local/bin"
 
 # Java
-if [ "$machine" = "Linux" ]; then
-	export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
-	export PATH="$JAVA_HOME:$PATH"
-elif [ "$machine" = "Mac" ]; then
-	export JAVA_HOME=$(/usr/libexec/java_home)
-	export PATH="$JAVA_HOME:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH="$JAVA_HOME:$PATH"
 
-	###############
-	# Java Switcher
-	###############
-	alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8); java -version"
-	alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11); java -version"
-	alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17); java -version"
-	alias j21="export JAVA_HOME=$(/usr/libexec/java_home -v 21); java -version"
-	alias j25="export JAVA_HOME=$(/usr/libexec/java_home -v 25); java -version"
+alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8); java -version"
+alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11); java -version"
+alias j17="export JAVA_HOME=$(/usr/libexec/java_home -v 17); java -version"
+alias j21="export JAVA_HOME=$(/usr/libexec/java_home -v 21); java -version"
+alias j25="export JAVA_HOME=$(/usr/libexec/java_home -v 25); java -version"
 
-	# Set java 25 as default
-	export JAVA_HOME=$(/usr/libexec/java_home -v 25)
-fi
-
-# Maven Setup
-export M2_HOME='/opt/apache-maven-3.9.6'
-export PATH="$M2_HOME/bin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home -v 25)
 
 # NVM Setup
 export NVM_SYMLINK_CURRENT=true
@@ -245,7 +147,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-# https://github.com/nvm-sh/nvm#zsh
 autoload -U add-zsh-hook
 
 load-nvmrc() {
@@ -269,21 +170,3 @@ load-nvmrc() {
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
-
-# Load Angular CLI autocompletion.
-if command -v ng &>/dev/null; then
-	source <(ng completion script)
-else
-	if command -v npm &>/dev/null; then
-		npm i -g @angular/cli
-		source <(ng completion script)
-	else
-		echo "npm not installed. Cannot install Angular CLI"
-	fi
-fi
-
-if [ "$machine" = "Linux" ]; then
-	export TMPDIR="/tmp"
-	export TMP="/tmp"
-	export TEMP="/tmp"
-fi
