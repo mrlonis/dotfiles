@@ -80,3 +80,10 @@ cdnvm() {
 
 alias cd='cdnvm'
 cdnvm "$PWD" || exit
+
+# Unity CLI
+. "/Users/mrlonis/.unity/env"
+
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/mrlonis/.docker/bin"
+# End of Docker Desktop section.

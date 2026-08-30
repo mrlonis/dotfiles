@@ -1,4 +1,4 @@
-# shellcheck disable=SC2034,SC2086,SC2139,SC2148,SC2155
+# shellcheck disable=SC2034,SC2086,SC2139,SC2148,SC2155,SC2206
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -173,3 +173,9 @@ load-nvmrc
 
 # Unity CLI
 . "/Users/mrlonis/.unity/env"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/mrlonis/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
