@@ -170,3 +170,6 @@ load-nvmrc() {
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+# Unity CLI
+. "/Users/mrlonis/.unity/env"
