@@ -80,3 +80,5 @@ cdnvm() {
 
 alias cd='cdnvm'
 cdnvm "$PWD" || exit
+
+export OLLAMA_LOAD_TIMEOUT=30m
