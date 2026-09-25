@@ -1,11 +1,16 @@
 #!/bin/bash
+shopt -s nullglob
 force_delete_all_local_branches=${1:-0}
 for org_dir in "$HOME"/GitHub/*; do
+	[[ -d "$org_dir" ]] || continue
 	echo "Processing GitHub Organization: $org_dir"
 	cd "$org_dir" || return
 
 	for project_dir in "$org_dir"/*; do
 		if [ -d "$project_dir" ]; then
+			# A .git file also supports linked worktrees and submodules.
+			[[ -e "$project_dir/.git" ]] || continue
+			[[ $(git -C "$project_dir" rev-parse --is-inside-work-tree 2>/dev/null) == true ]] || continue
 			echo " "
 			echo "Processing Project: $project_dir"
 			cd "$project_dir" || return
