@@ -181,18 +181,15 @@ files = [
 
 [[package]]
 name = "configupdater"
-version = "3.2"
+version = "4.1.1"
 description = "Parser like ConfigParser but for updating configuration files"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.11"
 groups = ["dev"]
 files = [
-    {file = "ConfigUpdater-3.2-py2.py3-none-any.whl", hash = "sha256:0f65a041627d7693840b4dd743581db4c441c97195298a29d075f91b79539df2"},
-    {file = "ConfigUpdater-3.2.tar.gz", hash = "sha256:9fdac53831c1b062929bf398b649b87ca30e7f1a735f3fbf482072804106306b"},
+    {file = "configupdater-4.1.1-py3-none-any.whl", hash = "sha256:5c1b867ba3cf455b8bec20ff53b36f53f37e3a801cfe7b3373336b968c883059"},
+    {file = "configupdater-4.1.1.tar.gz", hash = "sha256:5e56383fd05367f4204a9d46bf20b1bbb88b45257cb933938ff6f87bc17057e7"},
 ]
-
-[package.extras]
-testing = ["flake8", "pytest", "pytest-cov", "pytest-randomly", "pytest-xdist", "sphinx"]
 
 [[package]]
 name = "coverage"
@@ -1584,4 +1581,4 @@ python-discovery = ">=1.6.1"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.14.3"
-content-hash = "52b2d5f8f509dbcee24839135c167d6ea5d7ba14a4f6bff7875c429c7aac5e9c"
+content-hash = "873280328f1c697c8db9de03c64f09a12fcdd78cd900cb1977bf4b4beda155a2"
